@@ -1,0 +1,17 @@
+{
+	"Title"       : "Active Connections",
+	"Description" : "Select the Active Connections",
+	"RunParser"   : "false",
+	"Dbms"        : [ "sqlserver" ],
+	"BeforeSql"   : "",
+	"Sql"         : [ " SELECT spid DB_NAME(dbid) as DBName status loginame as LoginName hostname  program_name as program  FROM sys.sysprocesses WHERE dbid > 0 and DB_NAME(dbid) = @username;" ],
+	"AfterSql"    : "",
+	"Variables"   : [
+		{
+			"Name": "username",
+			"Type": "database"
+		}
+	],
+	"QuestionList": [],
+	"SequenceList": []
+}

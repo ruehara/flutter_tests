@@ -1,0 +1,17 @@
+{
+	"Title"       : "ExtractIndex",
+	"Description" : "Extract Indexes from the tables",
+	"RunParser"   : "false",
+	"Dbms"        : ["firebird"],
+	"BeforeSql"   : "",
+	"Sql"         : [" SELECT ix.rdb$index_name as index_name, sg.rdb$field_name as field_name, ix.rdb$relation_name as table_name FROM rdb$indices ix left join rdb$index_segments sg on ix.rdb$index_name = sg.rdb$index_name left join rdb$relation_constraints rc on rc.rdb$index_name = ix.rdb$index_name WHERE ix.rdb$index_type = 0 AND ix.RDB$relation_name = @tableName;"],
+	"AfterSql"    : "",
+	"Variables"   : [
+		{
+			"Name": "tableName",
+			"Type": "table"
+		}
+	],
+	"QuestionList": [],
+	"SequenceList": []
+}

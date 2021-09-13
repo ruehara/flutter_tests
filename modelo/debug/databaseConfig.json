@@ -1,0 +1,4 @@
+{
+  "ConnectionString": "Server=;Database=;User Id=sa;Password=Masterkey1;",
+  "DataBaseType": "sqlserver"
+}
