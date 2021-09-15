@@ -4,6 +4,7 @@ import 'package:teste1/app/widgets/side_bar.dart';
 
 import 'modules/home/home_module.dart';
 import 'modules/logs/logs_module.dart';
+import 'modules/question/question_module.dart';
 import 'modules/settings/settings_module.dart';
 import 'modules/todo/todo_module.dart';
 import 'modules/todo/todo_store.dart';
@@ -36,6 +37,11 @@ class AppModule extends Module {
     ModuleRoute(
       '/logs/',
       module: LogsModule(),
+      transition: TransitionType.fadeIn,
+    ),
+    ModuleRoute(
+      '/questions/',
+      module: QuestionModule(),
       transition: TransitionType.fadeIn,
     ),
   ];

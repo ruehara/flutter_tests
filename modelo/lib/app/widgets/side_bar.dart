@@ -89,13 +89,13 @@ class SideMenuState extends State<SideMenu> {
             ListTile(
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.category),
-              title: const Text('Example'),
+              title: const Text('Question'),
               selected: selectedIndex == 5,
               onTap: () {
                 setState(() {
                   selectedIndex = 5;
                 });
-                //Modular.to.navigate('/route');
+                Modular.to.navigate('/questions');
               },
             ),
           ],

@@ -1,0 +1,10 @@
+export 'package:flutter/material.dart';
+export 'package:flutter_modular/flutter_modular.dart';
+export 'package:analyzer_front/app/app_module.dart';
+export 'package:analyzer_front/app/app_widget.dart';
+export 'package:analyzer_front/app/modules/home/home_module.dart';
+export 'package:analyzer_front/app/modules/home/home_page.dart';
+export 'package:analyzer_front/app/modules/home/home_store.dart';
+export 'package:flutter_mobx/flutter_mobx.dart';
+export 'package:analyzer_front/app/utils/global_vars.dart';
+export 'package:analyzer_front/app/modules/settings/settings_module.dart';

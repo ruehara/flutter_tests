@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'question_store.dart';
+part of 'home_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,33 +8,26 @@ part of 'question_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$QuestionStore on _QuestionStoreBase, Store {
-  final _$valueAtom = Atom(name: '_QuestionStoreBase.value');
+mixin _$HomeStore on HomeStoreBase, Store {
+  final _$counterAtom = Atom(name: 'HomeStoreBase.counter');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  int get counter {
+    _$counterAtom.reportRead();
+    return super.counter;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set counter(int value) {
+    _$counterAtom.reportWrite(value, super.counter, () {
+      super.counter = value;
     });
-  }
-
-  final _$startAsyncAction = AsyncAction('_QuestionStoreBase.start');
-
-  @override
-  Future<void> start() {
-    return _$startAsyncAction.run(() => super.start());
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+counter: ${counter}
     ''';
   }
 }

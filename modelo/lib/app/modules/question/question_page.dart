@@ -8,6 +8,7 @@ class QuestionPage extends StatefulWidget {
   @override
   QuestionPageState createState() => QuestionPageState();
 }
+
 class QuestionPageState extends State<QuestionPage> {
   final QuestionStore store = Modular.get();
 
@@ -18,7 +19,14 @@ class QuestionPageState extends State<QuestionPage> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          TextButton(
+            onPressed: () {
+              store.start();
+            },
+            child: const Text('Start'),
+          )
+        ],
       ),
     );
   }
