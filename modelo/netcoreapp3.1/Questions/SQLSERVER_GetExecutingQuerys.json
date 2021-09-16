@@ -1,0 +1,12 @@
+{
+	"Title"       : "Get Executing Querys",
+	"Description" : "Get Executing Querys",
+	"RunParser"   : "false",
+	"Dbms"        : [ "sqlserver" ],
+	"BeforeSql"   : "",
+	"Sql"         : [ "SELECT S.SESSION_ID AS sid, S.HOST_NAME as machine, SUBSTRING(ST.TEXT,(R.STATEMENT_START_OFFSET / 2) + 1,((CASE R.STATEMENT_END_OFFSET WHEN -1 THEN DATALENGTH(ST.TEXT) ELSE R.STATEMENT_END_OFFSET END - R.STATEMENT_START_OFFSET) / 2) + 1) AS sql_text FROM SYS.DM_EXEC_SESSIONS AS S JOIN SYS.DM_EXEC_REQUESTS AS R ON R.SESSION_ID = S.SESSION_ID CROSS APPLY SYS.DM_EXEC_SQL_TEXT(R.SQL_HANDLE) AS ST ORDER BY R.CPU_TIME DESC, R.STATUS, R.BLOCKING_SESSION_ID, S.SESSION_ID ;" ],
+	"AfterSql"    : "",
+	"Variables"   : [],
+	"QuestionList": [],
+	"SequenceList": []
+}

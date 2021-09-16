@@ -7,7 +7,7 @@ class SettingsStore = _SettingsStoreBase with _$SettingsStore;
 
 abstract class _SettingsStoreBase with Store {
   @observable
-  late Settings settings;
+  Settings settings = Settings();
   final String filePath = '${Directory.current.path}\\$settingsFile';
 
   @observable

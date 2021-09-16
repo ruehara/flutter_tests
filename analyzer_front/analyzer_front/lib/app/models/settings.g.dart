@@ -6,20 +6,19 @@ part of 'settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
-      json['QuestionDirectory'] as String,
-      json['UserQuestionDirectory'] as String,
-      json['SequenceDirectory'] as String,
-      json['ReportDirectory'] as String,
-      json['LogDirectory'] as String,
-      json['LogFileName'] as String,
-      json['LogDetailLevel'] as String,
-      json['UserProfile'] as String,
-      json['FirebirdPrefix'] as String,
-      json['SqlServerPrefix'] as String,
-      json['OraclePrefix'] as String,
-      json['SqLitePrefix'] as String,
-    );
+Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings()
+  ..questionDirectory = json['QuestionDirectory'] as String
+  ..userQuestionDirectory = json['UserQuestionDirectory'] as String
+  ..sequenceDirectory = json['SequenceDirectory'] as String
+  ..reportDirectory = json['ReportDirectory'] as String
+  ..logDirectory = json['LogDirectory'] as String
+  ..logFileName = json['LogFileName'] as String
+  ..logDetailLevel = json['LogDetailLevel'] as String
+  ..userProfile = json['UserProfile'] as String
+  ..firebirdPrefix = json['FirebirdPrefix'] as String
+  ..sqlServerPrefix = json['SqlServerPrefix'] as String
+  ..oraclePrefix = json['OraclePrefix'] as String
+  ..sqLitePrefix = json['SqLitePrefix'] as String;
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'QuestionDirectory': instance.questionDirectory,

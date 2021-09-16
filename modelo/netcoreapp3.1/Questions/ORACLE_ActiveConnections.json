@@ -1,0 +1,17 @@
+{
+	"Title"       : "ActiveConnections",
+	"Description" : "Select active connections",
+	"RunParser"   : "false",
+	"Dbms"        : ["oracle"],
+	"BeforeSql"   : "",
+	"Sql"         : [" select sid, username, status, osuser, machine, program, typefrom v$session where username = :username; "],
+	"AfterSql"    : "",
+	"Variables"   : [
+		{
+			"Name":"username",
+			"Type":"database"
+		}
+	],
+	"QuestionList": [],
+	"SequenceList": []
+}

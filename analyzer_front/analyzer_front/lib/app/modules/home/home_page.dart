@@ -9,14 +9,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
+  final SideMenu sideMenu = Modular.get();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter'),
       ),
-      body: Observer(
-        builder: (context) => Text('${store.counter}'),
+      body: Row(
+        children: [
+          sideMenu,
+          Expanded(
+            flex: 1,
+            child: Observer(
+              builder: (context) => const Center(
+                child: Text('home'),
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

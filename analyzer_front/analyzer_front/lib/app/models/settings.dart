@@ -5,68 +5,55 @@ part 'settings.g.dart';
 
 @JsonSerializable()
 class Settings {
-  Settings(
-    this.questionDirectory,
-    this.userQuestionDirectory,
-    this.sequenceDirectory,
-    this.reportDirectory,
-    this.logDirectory,
-    this.logFileName,
-    this.logDetailLevel,
-    this.userProfile,
-    this.firebirdPrefix,
-    this.sqlServerPrefix,
-    this.oraclePrefix,
-    this.sqLitePrefix,
-  );
+  Settings();
 
   @JsonKey(name: 'QuestionDirectory')
   @observable
-  String questionDirectory;
+  String questionDirectory = "";
 
   @JsonKey(name: 'UserQuestionDirectory')
   @observable
-  String userQuestionDirectory;
+  String userQuestionDirectory = "";
 
   @JsonKey(name: 'SequenceDirectory')
   @observable
-  String sequenceDirectory;
+  String sequenceDirectory = "";
 
   @JsonKey(name: 'ReportDirectory')
   @observable
-  String reportDirectory;
+  String reportDirectory = "";
 
   @JsonKey(name: 'LogDirectory')
   @observable
-  String logDirectory;
+  String logDirectory = "";
 
   @JsonKey(name: 'LogFileName')
   @observable
-  String logFileName;
+  String logFileName = "";
 
   @JsonKey(name: 'LogDetailLevel')
   @observable
-  String logDetailLevel;
+  String logDetailLevel = "";
 
   @JsonKey(name: 'UserProfile')
   @observable
-  String userProfile;
+  String userProfile = "";
 
   @JsonKey(name: 'FirebirdPrefix')
   @observable
-  String firebirdPrefix;
+  String firebirdPrefix = "";
 
   @JsonKey(name: 'SqlServerPrefix')
   @observable
-  String sqlServerPrefix;
+  String sqlServerPrefix = "";
 
   @JsonKey(name: 'OraclePrefix')
   @observable
-  String oraclePrefix;
+  String oraclePrefix = "";
 
   @JsonKey(name: 'SqLitePrefix')
   @observable
-  String sqLitePrefix;
+  String sqLitePrefix = "";
 
   @action
   factory Settings.fromJson(Map<String, dynamic> json) =>

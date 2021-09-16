@@ -1,0 +1,4 @@
+{
+  "ConnectionString": "Server=LAPTOP-UEHARA\\SQLEXPRESS;Database=flutter;User Id=;Password=;",
+  "DataBaseType": "sqlserver"
+}
