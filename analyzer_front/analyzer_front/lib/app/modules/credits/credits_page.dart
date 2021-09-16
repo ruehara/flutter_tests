@@ -46,19 +46,45 @@ class CreditsPageState extends State<CreditsPage>
                 color: darkBlue,
                 padding: const EdgeInsets.all(1),
                 child: Center(
+                  widthFactor: 0.9,
                   child: Transform(
                     transform: Matrix4.identity()
-                      ..setEntry(3, 2, 0.007)
-                      ..rotateX(-0.7),
+                      ..setEntry(3, 2, 0.01)
+                      ..rotateX(-0.5),
                     alignment: FractionalOffset.center,
                     child: SingleChildScrollView(
                       controller: store.scrollController,
-                      child: Text(
-                        store.val,
-                        textAlign: TextAlign.justify,
-                        maxLines: 1000,
-                        style: const TextStyle(
-                            color: Colors.yellow, fontSize: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            store.cast,
+                            textAlign: TextAlign.center,
+                            maxLines: 1000,
+                            style: const TextStyle(
+                                color: Colors.yellow, fontSize: 20.0),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                store.roles,
+                                textAlign: TextAlign.end,
+                                maxLines: 1000,
+                                style: const TextStyle(
+                                    color: Colors.yellow, fontSize: 20.0),
+                              ),
+                              const SizedBox(width: 15),
+                              Text(
+                                store.persons,
+                                textAlign: TextAlign.start,
+                                maxLines: 1000,
+                                style: const TextStyle(
+                                    color: Colors.yellow, fontSize: 20.0),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),

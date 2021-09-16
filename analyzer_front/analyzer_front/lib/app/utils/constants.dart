@@ -16,25 +16,25 @@ const String dataBaseFile = "databaseConfig.json";
 
 const Color darkBlue = Color.fromARGB(255, 30, 30, 30);
 
-//stake holders
-String davi = "DAVI LADEIRA      ";
-String dyonatan = "DYONATAN DIOGO    ";
+// stakeholders
+String davi = "DAVI LADEIRA";
+String dyonatan = "DYONATAN DIOGO";
 String fabricio = "FABRÍCIO PALMEZONI";
-String ivan = "IVAN JUNIOR       ";
-String jessica = "JÉSSICA TEIXEIRA  ";
-String jose = "JOSE RICARDO      ";
-String leandro = "LEANDRO CARNEIRO  ";
-String luan = "LUAN DE ASSIS     ";
-String nathalia = "NATHÁLIA YUNES    ";
-String rodrigo = "RODRIGO UEHARA    ";
-String sebastiao = "SEBASTIÃO NETO    ";
+String ivan = "IVAN JUNIOR";
+String jessica = "JÉSSICA TEIXEIRA";
+String jose = "JOSE RICARDO";
+String leandro = "LEANDRO CARNEIRO";
+String luan = "LUAN DE ASSIS";
+String nathalia = "NATHÁLIA YUNES";
+String rodrigo = "RODRIGO UEHARA";
+String sebastiao = "SEBASTIÃO NETO";
 
-//roles
-String backEndDeveloper = " Backend Developer";
-String backEndTester = "    Backend Tester";
+// roles
+String backEndDeveloper = "Backend Developer";
+String backEndTester = "Backend Tester";
 String frontEndDeveloper = "Frontend Developer";
-String frontEndTester = "   Frontend Tester";
-String productOwner = "     Product Owner";
-String technicalMentor = "  Technical Mentor";
-String managmentMentor = "  Managment Mentor";
-String customer = "          Customer";
+String frontEndTester = "Frontend Tester";
+String productOwner = "Product Owner";
+String technicalMentor = "Technical Mentors";
+String managmentMentor = "Management Mentors";
+String customer = "Customers";

@@ -20,71 +20,40 @@ abstract class _CreditsStoreBase with Store {
         curve: Curves.linear);
   }
 
-  String val =
-      """
+  String cast = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+      "  CAST\n\n\n";
 
+  String roles = "$backEndDeveloper\n"
+      "$backEndTester\n"
+      "$frontEndDeveloper\n"
+      "\n"
+      "\n"
+      "\n"
+      "$frontEndTester\n"
+      "$productOwner\n"
+      "$technicalMentor\n"
+      "\n"
+      "$managmentMentor\n"
+      "\n"
+      "$customer\n"
+      "\n"
+      "\n"
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                CAST 
-
-   $backEndDeveloper  $rodrigo
-       $backEndTester  $luan
-   $frontEndDeveloper  $davi
-                                     $leandro
-                                     $luan
-                                     $rodrigo
-       $frontEndTester  $davi
-      $productOwner  $dyonatan
-      $technicalMentor  $fabricio
-                                     $jose
- $managmentMentor  $jessica
-                                     $nathalia
-          $customer  $fabricio
-                                     $ivan
-                                     $sebastiao
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-""";
+  String persons = "$rodrigo\n"
+      "$luan\n"
+      "$davi\n"
+      "$leandro\n"
+      "$luan\n"
+      "$rodrigo\n"
+      "$davi\n"
+      "$dyonatan\n"
+      "$fabricio\n"
+      "$jose\n"
+      "$jessica\n"
+      "$nathalia\n"
+      "$fabricio\n"
+      "$ivan\n"
+      "$sebastiao\n"
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
