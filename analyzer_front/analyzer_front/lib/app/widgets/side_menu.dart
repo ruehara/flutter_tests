@@ -19,6 +19,9 @@ class SideMenuState extends State<SideMenu> {
       child: Drawer(
         child: Column(
           children: [
+            const SizedBox(
+              height: 55,
+            ),
             ListTile(
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.home),
