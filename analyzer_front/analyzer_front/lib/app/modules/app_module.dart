@@ -22,7 +22,7 @@ class AppModule extends Module {
       creditsInitialRoute,
       module: CreditsModule(),
       transition: TransitionType.fadeIn,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1000),
     ),
   ];
 }

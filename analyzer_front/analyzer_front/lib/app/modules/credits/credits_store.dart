@@ -20,42 +20,15 @@ abstract class _CreditsStoreBase with Store {
         curve: Curves.linear);
   }
 
-  String cast = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-      "  CAST\n";
+  String cast = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  CAST\n";
 
-  String roles = "$productOwner\n"
-      "$backEndDeveloper\n"
-      "$backEndTester\n"
-      "$frontEndDesigner\n"
-      "$frontEndDeveloper\n"
-      "\n"
-      "\n"
-      "\n"
-      "$frontEndTester\n"
-      "$technicalMentor\n"
-      "\n"
-      "$managmentMentor\n"
-      "\n"
-      "$customer\n"
-      "\n"
-      "\n"
+  String roles = "$productOwner\n$backEndDeveloper\n$backEndTester\n"
+      "$frontEndDesigner\n$frontEndDeveloper\n\n\n\n$frontEndTester\n"
+      "$technicalMentor\n\n$managmentMentor\n\n$customer\n\n\n"
       "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
-  String persons = "$dyonatan\n"
-      "$rodrigo\n"
-      "$luan\n"
-      "$leandro\n"
-      "$davi\n"
-      "$leandro\n"
-      "$luan\n"
-      "$rodrigo\n"
-      "$davi\n"
-      "$fabricio\n"
-      "$jose\n"
-      "$jessica\n"
-      "$nathalia\n"
-      "$fabricio\n"
-      "$ivan\n"
-      "$sebastiao\n"
+  String persons = "$dyonatan\n$rodrigo\n$luan\n$leandro\n$davi\n"
+      "$leandro\n$luan\n$rodrigo\n$davi\n$fabricio\n$jose\n"
+      "$jessica\n$nathalia\n$fabricio\n$ivan\n$sebastiao\n"
       "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }

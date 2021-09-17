@@ -8,7 +8,7 @@ class SettingsStore = _SettingsStoreBase with _$SettingsStore;
 abstract class _SettingsStoreBase with Store {
   @observable
   Settings settings = Settings();
-  final String filePath = '${Directory.current.path}\\$settingsFile';
+  final String filePath = '${Directory.current.path}/$settingsFile';
 
   @observable
   var edtQuestionDirectory = TextEditingController();
@@ -30,6 +30,10 @@ abstract class _SettingsStoreBase with Store {
   var edtOraclePrefix = TextEditingController();
   @observable
   var edtSqLitePrefix = TextEditingController();
+  @observable
+  var edtLogDetail = TextEditingController();
+  @observable
+  var edtUserProfile = TextEditingController();
 
   @action
   Future<bool> readJsonFile() async {
@@ -96,6 +100,8 @@ abstract class _SettingsStoreBase with Store {
     edtReportDirectory.text = settings.reportDirectory;
     edtLogDirectory.text = settings.logDirectory;
     edtLogFileName.text = settings.logFileName;
+    edtLogDetail.text = settings.logDetailLevel;
+    edtUserProfile.text = settings.userProfile;
     edtFirebirdPrefix.text = settings.firebirdPrefix;
     edtSqlServerPrefix.text = settings.sqlServerPrefix;
     edtOraclePrefix.text = settings.oraclePrefix;
