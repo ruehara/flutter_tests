@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/widgets/app_bar.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -10,32 +11,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
   final SideMenu sideMenu = Modular.get();
+  CustomScrollBehavior scroll = CustomScrollBehavior();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Counter'),
-      ),
-      body: Row(
-        children: [
-          sideMenu,
-          Expanded(
-            flex: 1,
-            child: Observer(
-              builder: (context) => const Center(
-                child: Text('home'),
+      body: CustomScrollView(slivers: <Widget>[
+        MyAppBar(title: 'Home').appBar(),
+        Row(
+          children: [
+            sideMenu,
+            Expanded(
+              flex: 1,
+              child: Observer(
+                builder: (context) => Center(
+                  child: ScrollConfiguration(
+                    behavior: scroll,
+                    child: const Text('teste'),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          store.increment();
-        },
-        child: const Icon(Icons.add),
-      ),
+          ],
+        ),
+      ]),
     );
   }
 }

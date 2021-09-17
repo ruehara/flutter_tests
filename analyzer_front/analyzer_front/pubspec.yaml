@@ -14,8 +14,6 @@ dependencies:
   mobx: ^2.0.4
   flutter_mobx: ^2.0.2
   json_annotation: ^4.1.0
-  animated_text_kit: ^4.2.1
-
 
 dev_dependencies:
   flutter_test:

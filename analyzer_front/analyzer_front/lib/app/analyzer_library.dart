@@ -17,3 +17,4 @@ export 'package:analyzer_front/app/modules/settings/settings_store.dart';
 export 'package:analyzer_front/app/modules/credits/credits_store.dart';
 export 'package:analyzer_front/app/modules/credits/credits_page.dart';
 export 'package:analyzer_front/app/modules/credits/credits_module.dart';
+export 'package:analyzer_front/app/utils/scroll_controller.dart';

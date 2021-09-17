@@ -22,7 +22,7 @@ String dyonatan = "DYONATAN DIOGO";
 String fabricio = "FABRÍCIO PALMEZONI";
 String ivan = "IVAN JUNIOR";
 String jessica = "JÉSSICA TEIXEIRA";
-String jose = "JOSE RICARDO";
+String jose = "JOSÉ RICARDO";
 String leandro = "LEANDRO CARNEIRO";
 String luan = "LUAN DE ASSIS";
 String nathalia = "NATHÁLIA YUNES";
@@ -32,6 +32,7 @@ String sebastiao = "SEBASTIÃO NETO";
 // roles
 String backEndDeveloper = "Backend Developer";
 String backEndTester = "Backend Tester";
+String frontEndDesigner = "Frontend Designer";
 String frontEndDeveloper = "Frontend Developer";
 String frontEndTester = "Frontend Tester";
 String productOwner = "Product Owner";

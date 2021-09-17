@@ -13,6 +13,7 @@ class CreditsPageState extends State<CreditsPage>
     with TickerProviderStateMixin {
   final CreditsStore store = Modular.get();
   final SideMenu sideMenu = Modular.get();
+  CustomScrollBehavior scroll = CustomScrollBehavior();
 
   @override
   void initState() {
@@ -40,8 +41,7 @@ class CreditsPageState extends State<CreditsPage>
           Expanded(
             flex: 1,
             child: ScrollConfiguration(
-              behavior:
-                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              behavior: scroll.copyWith(scrollbars: false),
               child: Container(
                 color: darkBlue,
                 padding: const EdgeInsets.all(1),
@@ -50,7 +50,7 @@ class CreditsPageState extends State<CreditsPage>
                   child: Transform(
                     transform: Matrix4.identity()
                       ..setEntry(3, 2, 0.01)
-                      ..rotateX(-0.5),
+                      ..rotateX(-0.45),
                     alignment: FractionalOffset.center,
                     child: SingleChildScrollView(
                       controller: store.scrollController,
