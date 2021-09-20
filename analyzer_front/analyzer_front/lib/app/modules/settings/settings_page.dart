@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/widgets/dialog.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key, this.title = 'Settings Page'})
@@ -25,15 +26,20 @@ class SettingsPageState extends State<SettingsPage> {
   _textInput({
     required TextEditingController controller,
     required String labelText,
+    required Function onchanged,
   }) {
-    return TextFormField(
-      controller: controller,
-      maxLines: 1,
-      decoration: InputDecoration(
-        labelText: labelText,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: TextFormField(
+        controller: controller,
+        onChanged: (value) => onchanged(value),
+        maxLines: 1,
+        decoration: InputDecoration(
+          labelText: labelText,
+        ),
+        validator: (value) =>
+            value!.isEmpty ? '$labelText can\'t be empty' : null,
       ),
-      validator: (value) =>
-          value!.isEmpty ? '$labelText can\'t be empty' : null,
     );
   }
 
@@ -41,40 +47,45 @@ class SettingsPageState extends State<SettingsPage> {
     required String label,
     required List<String> list,
     required TextEditingController controller,
+    required Function onchanged,
   }) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const SizedBox(
-        height: 10,
-      ),
-      Text(
-        label,
-        textAlign: TextAlign.left,
-        style: const TextStyle(fontSize: 11, color: Colors.black54),
-      ),
-      DropdownButton<String>(
-        value: controller.text,
-        icon: const Icon(Icons.arrow_drop_down_sharp),
-        isDense: true,
-        iconSize: 22,
-        elevation: 16,
-        isExpanded: true,
-        underline: Container(
-          height: 2,
-          color: Colors.black12,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const SizedBox(
+          height: 10,
         ),
-        onChanged: (String? newValue) {
-          setState(() {
-            controller.text = newValue!;
-          });
-        },
-        items: list.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      ),
-    ]);
+        Text(
+          label,
+          textAlign: TextAlign.left,
+          style: const TextStyle(fontSize: 11, color: Colors.black54),
+        ),
+        DropdownButton<String>(
+          value: controller.text,
+          icon: const Icon(Icons.arrow_drop_down_sharp),
+          isDense: true,
+          iconSize: 22,
+          elevation: 16,
+          isExpanded: true,
+          underline: Container(
+            height: 2,
+            color: Colors.black12,
+          ),
+          onChanged: (newValue) {
+            setState(() {
+              controller.text = newValue!;
+              onchanged(newValue);
+            });
+          },
+          items: list.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ]),
+    );
   }
 
   @override
@@ -83,72 +94,147 @@ class SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Observer(
-        builder: (context) => Row(
-          children: [
-            sideMenu,
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Form(
+      body: Row(
+        children: [
+          sideMenu,
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: Observer(
+                builder: (context) => Form(
                   child: SingleChildScrollView(
-                    child: Row(
+                    child: Column(
                       children: [
-                        Expanded(
-                          child: formFieldsLeft(),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: formFieldsLeft(),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(20),
+                            ),
+                            Expanded(
+                              child: formFieldsRight(),
+                            ),
+                          ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(20),
+                        const SizedBox(
+                          height: 30,
                         ),
-                        Expanded(
-                          child: formFieldsRight(),
-                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton.icon(
+                              onPressed: () {
+                                sideMenu.setSelected(0);
+                                Modular.to.navigate(Modular.initialRoute);
+                              },
+                              icon: const Icon(Icons.cancel),
+                              label: const Text("Cancel"),
+                            ),
+                            TextButton.icon(
+                              onPressed: () {
+                                setState(() {
+                                  store.setDefaults();
+                                });
+                              },
+                              icon: const Icon(Icons.restore),
+                              label: const Text("Restore"),
+                            ),
+                            TextButton.icon(
+                              onPressed: () {
+                                Dialogs dialog =
+                                    Dialogs(context: context, goToHome: true);
+                                dialog.showAlertDialog().then(
+                                  (value) {
+                                    if (value) {
+                                      store.saveJsonFile();
+                                    }
+                                  },
+                                );
+                              },
+                              icon: const Icon(Icons.save),
+                              label: const Text("Save"),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   Widget formFieldsLeft() {
-    return Column(children: [
-      _textInput(
-          controller: store.edtQuestionDirectory,
-          labelText: 'Question Directory'),
-      _textInput(
-          controller: store.edtUserQuestionDirectory,
-          labelText: 'UserQuestion Directory'),
-      _textInput(
-          controller: store.edtSequenceDirectory,
-          labelText: 'Sequence Directory'),
-      _textInput(
-          controller: store.edtReportDirectory, labelText: 'Report Directory'),
-      _textInput(controller: store.edtLogDirectory, labelText: 'Log Directory'),
-      _textInput(controller: store.edtLogFileName, labelText: 'Log FileName'),
-    ]);
+    return Observer(
+      builder: (_) => Column(children: [
+        _textInput(
+            controller: store.edtQuestionDirectory,
+            onchanged: store.setQuestionDirectory,
+            labelText: 'Question Directory'),
+        _textInput(
+            controller: store.edtUserQuestionDirectory,
+            onchanged: store.setUserQuestionDirectory,
+            labelText: 'UserQuestion Directory'),
+        _textInput(
+            controller: store.edtSequenceDirectory,
+            onchanged: store.setSequenceDirectory,
+            labelText: 'Sequence Directory'),
+        _textInput(
+            controller: store.edtReportDirectory,
+            onchanged: store.setReportDirectory,
+            labelText: 'Report Directory'),
+        _textInput(
+            controller: store.edtLogDirectory,
+            onchanged: store.setLogDirectory,
+            labelText: 'Log Directory'),
+        _textInput(
+          controller: store.edtLogFileName,
+          onchanged: store.setLogFileName,
+          labelText: 'Log FileName',
+        ),
+      ]),
+    );
   }
 
   Widget formFieldsRight() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      _dropdown(
-          label: 'Log Detail Level',
-          controller: store.edtLogDetail,
-          list: ['', 'low', 'medium', 'high']),
-      _dropdown(
-          label: 'User Profile',
-          controller: store.edtUserProfile,
-          list: ['', 'admin', 'user']),
-      _textInput(
-          controller: store.edtFirebirdPrefix, labelText: 'Firebird Prefix'),
-      _textInput(
-          controller: store.edtSqlServerPrefix, labelText: 'SqlServer Prefix'),
-      _textInput(controller: store.edtOraclePrefix, labelText: 'Oracle Prefix'),
-      _textInput(controller: store.edtSqLitePrefix, labelText: 'SQLite Prefix'),
-    ]);
+    return Observer(
+      builder: (_) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _dropdown(
+              label: 'Log Detail Level',
+              controller: store.edtLogDetail,
+              onchanged: store.setLogDetailLevel,
+              list: ['', 'low', 'medium', 'high']),
+          _dropdown(
+              label: 'User Profile',
+              controller: store.edtUserProfile,
+              onchanged: store.setUserProfile,
+              list: ['', 'admin', 'user']),
+          _textInput(
+              controller: store.edtFirebirdPrefix,
+              onchanged: store.setFirebirdPrefix,
+              labelText: 'Firebird Prefix'),
+          _textInput(
+              controller: store.edtSqlServerPrefix,
+              onchanged: store.setSqlServerPrefix,
+              labelText: 'SqlServer Prefix'),
+          _textInput(
+              controller: store.edtOraclePrefix,
+              onchanged: store.setOraclePrefix,
+              labelText: 'Oracle Prefix'),
+          _textInput(
+              controller: store.edtSqLitePrefix,
+              onchanged: store.setSqLitePrefix,
+              labelText: 'SQLite Prefix'),
+        ],
+      ),
+    );
   }
 }

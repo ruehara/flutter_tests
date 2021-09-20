@@ -18,7 +18,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       body: ScrollConfiguration(
         behavior: scroll,
         child: NestedScrollView(
-          controller: ScrollController(initialScrollOffset: 200 - 54),
+          controller: ScrollController(initialScrollOffset: 200 - 56),
           headerSliverBuilder: (
             BuildContext context,
             bool condition,

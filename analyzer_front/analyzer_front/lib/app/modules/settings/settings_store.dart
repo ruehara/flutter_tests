@@ -8,6 +8,7 @@ class SettingsStore = _SettingsStoreBase with _$SettingsStore;
 abstract class _SettingsStoreBase with Store {
   @observable
   Settings settings = Settings();
+
   final String filePath = '${Directory.current.path}/$settingsFile';
 
   @observable
@@ -34,6 +35,67 @@ abstract class _SettingsStoreBase with Store {
   var edtLogDetail = TextEditingController();
   @observable
   var edtUserProfile = TextEditingController();
+  @action
+  void setQuestionDirectory(String value) {
+    settings.questionDirectory = value;
+  }
+
+  @action
+  void setUserQuestionDirectory(String value) {
+    settings.userQuestionDirectory = value;
+  }
+
+  @action
+  void setSequenceDirectory(String value) {
+    settings.sequenceDirectory = value;
+  }
+
+  @action
+  void setReportDirectory(String value) {
+    settings.reportDirectory = value;
+  }
+
+  @action
+  void setLogDirectory(String value) {
+    settings.logDirectory = value;
+  }
+
+  @action
+  void setLogFileName(String value) {
+    settings.logFileName = value;
+  }
+
+  @action
+  void setLogDetailLevel(String value) {
+    settings.logDetailLevel = value;
+    edtLogDetail.text = value;
+  }
+
+  @action
+  void setUserProfile(String value) {
+    settings.userProfile = value;
+    edtUserProfile.text = value;
+  }
+
+  @action
+  void setFirebirdPrefix(String value) {
+    settings.firebirdPrefix = value;
+  }
+
+  @action
+  void setSqlServerPrefix(String value) {
+    settings.sqlServerPrefix = value;
+  }
+
+  @action
+  void setOraclePrefix(String value) {
+    settings.oraclePrefix = value;
+  }
+
+  @action
+  void setSqLitePrefix(String value) {
+    settings.sqLitePrefix = value;
+  }
 
   @action
   Future<bool> readJsonFile() async {
@@ -90,6 +152,7 @@ abstract class _SettingsStoreBase with Store {
     settings.sqlServerPrefix = '@';
     settings.oraclePrefix = ':';
     settings.sqLitePrefix = ':';
+    initialization();
   }
 
   @action

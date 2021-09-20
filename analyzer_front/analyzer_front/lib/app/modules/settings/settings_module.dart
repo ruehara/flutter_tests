@@ -1,11 +1,9 @@
-import 'package:analyzer_front/app/modules/settings/settings_Page.dart';
-import 'package:analyzer_front/app/modules/settings/settings_store.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:analyzer_front/app/analyzer_library.dart';
 
 class SettingsModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => SettingsStore()),
+    Bind.factory((i) => SettingsStore(), export: true),
   ];
 
   @override
