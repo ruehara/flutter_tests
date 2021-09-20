@@ -1,16 +1,30 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
 
-class HomePage extends StatefulWidget {
+abstract class CustomPage extends StatefulWidget {
   final String title;
-  const HomePage({Key? key, this.title = "Home"}) : super(key: key);
+  final Widget bodyPage;
+  final Function? init;
+  const CustomPage({
+    Key? key,
+    required this.title,
+    required this.bodyPage,
+    this.init,
+  }) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _PageState createState() => _PageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeStore> {
+class _PageState extends State<CustomPage> {
   final SideMenu sideMenu = Modular.get();
   CustomScrollBehavior scroll = CustomScrollBehavior();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.init;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +37,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             bool condition,
           ) {
             return [
-              const SliverAppBar(
+              SliverAppBar(
+                title: Text(widget.title),
                 forceElevated: true,
                 pinned: true,
                 floating: true,
@@ -39,9 +54,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 Expanded(
                   flex: 1,
                   child: Observer(
-                    builder: (context) => const Center(
-                      child: Text('teste'),
-                    ),
+                    builder: (context) => Center(child: widget.bodyPage),
                   ),
                 ),
               ],

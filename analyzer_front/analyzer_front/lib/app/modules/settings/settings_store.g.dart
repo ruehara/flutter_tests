@@ -186,6 +186,36 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     });
   }
 
+  final _$edtLogDetailAtom = Atom(name: '_SettingsStoreBase.edtLogDetail');
+
+  @override
+  TextEditingController get edtLogDetail {
+    _$edtLogDetailAtom.reportRead();
+    return super.edtLogDetail;
+  }
+
+  @override
+  set edtLogDetail(TextEditingController value) {
+    _$edtLogDetailAtom.reportWrite(value, super.edtLogDetail, () {
+      super.edtLogDetail = value;
+    });
+  }
+
+  final _$edtUserProfileAtom = Atom(name: '_SettingsStoreBase.edtUserProfile');
+
+  @override
+  TextEditingController get edtUserProfile {
+    _$edtUserProfileAtom.reportRead();
+    return super.edtUserProfile;
+  }
+
+  @override
+  set edtUserProfile(TextEditingController value) {
+    _$edtUserProfileAtom.reportWrite(value, super.edtUserProfile, () {
+      super.edtUserProfile = value;
+    });
+  }
+
   final _$readJsonFileAsyncAction =
       AsyncAction('_SettingsStoreBase.readJsonFile');
 
@@ -212,6 +242,138 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
 
   final _$_SettingsStoreBaseActionController =
       ActionController(name: '_SettingsStoreBase');
+
+  @override
+  void setQuestionDirectory(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setQuestionDirectory');
+    try {
+      return super.setQuestionDirectory(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUserQuestionDirectory(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setUserQuestionDirectory');
+    try {
+      return super.setUserQuestionDirectory(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSequenceDirectory(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setSequenceDirectory');
+    try {
+      return super.setSequenceDirectory(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setReportDirectory(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setReportDirectory');
+    try {
+      return super.setReportDirectory(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLogDirectory(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setLogDirectory');
+    try {
+      return super.setLogDirectory(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLogFileName(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setLogFileName');
+    try {
+      return super.setLogFileName(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLogDetailLevel(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setLogDetailLevel');
+    try {
+      return super.setLogDetailLevel(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUserProfile(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setUserProfile');
+    try {
+      return super.setUserProfile(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFirebirdPrefix(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setFirebirdPrefix');
+    try {
+      return super.setFirebirdPrefix(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSqlServerPrefix(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setSqlServerPrefix');
+    try {
+      return super.setSqlServerPrefix(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setOraclePrefix(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setOraclePrefix');
+    try {
+      return super.setOraclePrefix(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSqLitePrefix(String value) {
+    final _$actionInfo = _$_SettingsStoreBaseActionController.startAction(
+        name: '_SettingsStoreBase.setSqLitePrefix');
+    try {
+      return super.setSqLitePrefix(value);
+    } finally {
+      _$_SettingsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setDefaults() {
@@ -248,7 +410,9 @@ edtLogFileName: ${edtLogFileName},
 edtFirebirdPrefix: ${edtFirebirdPrefix},
 edtSqlServerPrefix: ${edtSqlServerPrefix},
 edtOraclePrefix: ${edtOraclePrefix},
-edtSqLitePrefix: ${edtSqLitePrefix}
+edtSqLitePrefix: ${edtSqLitePrefix},
+edtLogDetail: ${edtLogDetail},
+edtUserProfile: ${edtUserProfile}
     ''';
   }
 }

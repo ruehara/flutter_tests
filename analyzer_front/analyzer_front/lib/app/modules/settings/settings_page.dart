@@ -1,5 +1,4 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
-import 'package:analyzer_front/app/widgets/dialog.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key, this.title = 'Settings Page'})

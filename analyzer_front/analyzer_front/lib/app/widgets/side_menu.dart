@@ -98,12 +98,24 @@ class SideMenuState extends State<SideMenu> {
             ),
             ListTile(
               hoverColor: Colors.blueGrey,
-              leading: const Icon(Icons.credit_score),
-              title: const Text('Credits'),
+              leading: const Icon(Icons.note),
+              title: const Text('Logs'),
               selected: selectedIndex == 6,
               onTap: () {
                 setState(() {
                   selectedIndex = 6;
+                });
+                Modular.to.navigate(logsInitialRoute);
+              },
+            ),
+            ListTile(
+              hoverColor: Colors.blueGrey,
+              leading: const Icon(Icons.credit_score),
+              title: const Text('Credits'),
+              selected: selectedIndex == 7,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 7;
                 });
                 Modular.to.navigate(creditsInitialRoute);
               },

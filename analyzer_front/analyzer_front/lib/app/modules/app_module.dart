@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/modules/logs/logs_module.dart';
 
 class AppModule extends Module {
   @override
@@ -21,6 +22,12 @@ class AppModule extends Module {
     ModuleRoute(
       creditsInitialRoute,
       module: CreditsModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 1000),
+    ),
+    ModuleRoute(
+      logsInitialRoute,
+      module: LogsModule(),
       transition: TransitionType.fadeIn,
       duration: const Duration(milliseconds: 1000),
     ),
