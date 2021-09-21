@@ -36,3 +36,8 @@ export 'package:analyzer_front/app/modules/sequence/sequence_store.dart';
 export 'package:analyzer_front/app/widgets/dialog.dart';
 export 'package:analyzer_front/app/modules/user_question/user_question_page.dart';
 export 'package:analyzer_front/app/modules/user_question/user_question_store.dart';
+export 'package:analyzer_front/app/models/variable.dart';
+export 'package:analyzer_front/app/models/sequence.dart';
+export 'package:analyzer_front/app/models/question.dart';
+export 'package:analyzer_front/app/modules/logs/logs_module.dart';
+export 'package:analyzer_front/app/modules/user_question/user_question_module.dart';

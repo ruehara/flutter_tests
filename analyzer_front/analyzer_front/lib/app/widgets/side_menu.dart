@@ -49,12 +49,24 @@ class SideMenuState extends State<SideMenu> {
             ),
             ListTile(
               hoverColor: Colors.blueGrey,
-              leading: const Icon(Icons.schema),
-              title: const Text('Sequences'),
+              leading: const Icon(Icons.list),
+              title: const Text('User Questions'),
               selected: selectedIndex == 2,
               onTap: () {
                 setState(() {
                   selectedIndex = 2;
+                });
+                Modular.to.navigate(userQuestionInitialRoute);
+              },
+            ),
+            ListTile(
+              hoverColor: Colors.blueGrey,
+              leading: const Icon(Icons.schema),
+              title: const Text('Sequences'),
+              selected: selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 3;
                 });
 
                 //Modular.to.navigate('/settings');
@@ -64,10 +76,10 @@ class SideMenuState extends State<SideMenu> {
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.dashboard),
               title: const Text('Dashboard'),
-              selected: selectedIndex == 3,
+              selected: selectedIndex == 4,
               onTap: () {
                 setState(() {
-                  selectedIndex = 3;
+                  selectedIndex = 4;
                 });
                 //Modular.to.navigate('/todo');
               },
@@ -76,18 +88,6 @@ class SideMenuState extends State<SideMenu> {
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
-              selected: selectedIndex == 4,
-              onTap: () {
-                setState(() {
-                  selectedIndex = 4;
-                });
-                Modular.to.navigate(settingsInitialRoute);
-              },
-            ),
-            ListTile(
-              hoverColor: Colors.blueGrey,
-              leading: const Icon(Icons.storage),
-              title: const Text('Connection'),
               selected: selectedIndex == 5,
               onTap: () {
                 setState(() {
@@ -98,12 +98,24 @@ class SideMenuState extends State<SideMenu> {
             ),
             ListTile(
               hoverColor: Colors.blueGrey,
-              leading: const Icon(Icons.note),
-              title: const Text('Logs'),
+              leading: const Icon(Icons.storage),
+              title: const Text('Connection'),
               selected: selectedIndex == 6,
               onTap: () {
                 setState(() {
                   selectedIndex = 6;
+                });
+                Modular.to.navigate(settingsInitialRoute);
+              },
+            ),
+            ListTile(
+              hoverColor: Colors.blueGrey,
+              leading: const Icon(Icons.note),
+              title: const Text('Logs'),
+              selected: selectedIndex == 7,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 7;
                 });
                 Modular.to.navigate(logsInitialRoute);
               },
@@ -112,10 +124,10 @@ class SideMenuState extends State<SideMenu> {
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.credit_score),
               title: const Text('Credits'),
-              selected: selectedIndex == 7,
+              selected: selectedIndex == 8,
               onTap: () {
                 setState(() {
-                  selectedIndex = 7;
+                  selectedIndex = 8;
                 });
                 Modular.to.navigate(creditsInitialRoute);
               },

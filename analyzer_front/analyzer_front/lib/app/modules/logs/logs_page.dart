@@ -6,6 +6,6 @@ class LogsPage extends CustomPage {
       : super(
           key: key,
           title: 'Logs Page',
-          bodyPage: const Text('teste log page'),
+          bodyPage: const Text('In construction...'),
         );
 }

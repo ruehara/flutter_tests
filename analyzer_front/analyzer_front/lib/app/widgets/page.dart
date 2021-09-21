@@ -3,12 +3,10 @@ import 'package:analyzer_front/app/analyzer_library.dart';
 abstract class CustomPage extends StatefulWidget {
   final String title;
   final Widget bodyPage;
-  final Function? init;
   const CustomPage({
     Key? key,
     required this.title,
     required this.bodyPage,
-    this.init,
   }) : super(key: key);
 
   @override
@@ -22,7 +20,6 @@ class _PageState extends State<CustomPage> {
   @override
   void initState() {
     super.initState();
-    widget.init;
   }
 
   @override

@@ -9,39 +9,25 @@ part of 'user_question_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserQuestionStore on _UserQuestionStoreBase, Store {
-  final _$valueAtom = Atom(name: '_UserQuestionStoreBase.value');
+  final _$questionsAtom = Atom(name: '_UserQuestionStoreBase.questions');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  List<Question> get questions {
+    _$questionsAtom.reportRead();
+    return super.questions;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set questions(List<Question> value) {
+    _$questionsAtom.reportWrite(value, super.questions, () {
+      super.questions = value;
     });
-  }
-
-  final _$_UserQuestionStoreBaseActionController =
-      ActionController(name: '_UserQuestionStoreBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_UserQuestionStoreBaseActionController.startAction(
-        name: '_UserQuestionStoreBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_UserQuestionStoreBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+questions: ${questions}
     ''';
   }
 }
