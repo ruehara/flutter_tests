@@ -35,6 +35,7 @@ abstract class _SettingsStoreBase with Store {
   var edtLogDetail = TextEditingController();
   @observable
   var edtUserProfile = TextEditingController();
+
   @action
   void setQuestionDirectory(String value) {
     settings.questionDirectory = value;

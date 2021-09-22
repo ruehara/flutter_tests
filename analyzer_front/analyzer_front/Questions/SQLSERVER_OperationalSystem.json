@@ -1,0 +1,12 @@
+{
+	"Title"       : "Operational System",
+	"Description" : "Select the distribuition of the system",
+	"RunParser"   : "false",
+	"Dbms"        : [ "sqlserver" ],
+	"BeforeSql"   : "",
+	"Sql"         : [ "select host_distribution from sys.dm_os_host_info;" ],
+	"AfterSql"    : "",
+	"Variables"   : [],
+	"QuestionList": [],
+	"SequenceList": []
+}

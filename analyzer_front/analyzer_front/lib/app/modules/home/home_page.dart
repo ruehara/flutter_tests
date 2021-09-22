@@ -10,7 +10,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
   final SideMenu sideMenu = Modular.get();
+  final SettingsStore settingsStore = Modular.get();
   CustomScrollBehavior scroll = CustomScrollBehavior();
+
+  @override
+  void initState() {
+    super.initState();
+    settingsStore.readJsonFile().then(
+          (_) => setState(() {
+            settingsStore.initialization();
+          }),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

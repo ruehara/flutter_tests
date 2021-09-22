@@ -9,9 +9,19 @@ class UserQuestionPage extends StatefulWidget {
   _UserQuestionState createState() => _UserQuestionState();
 }
 
-class _UserQuestionState extends ModularState<UserQuestionPage, HomeStore> {
+class _UserQuestionState
+    extends ModularState<UserQuestionPage, UserQuestionStore> {
   final SideMenu sideMenu = Modular.get();
   CustomScrollBehavior scroll = CustomScrollBehavior();
+  @override
+  void initState() {
+    super.initState();
+    store.readJsonFile().then(
+          (_) => setState(() {}),
+        );
+    store.getFiles();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +50,11 @@ class _UserQuestionState extends ModularState<UserQuestionPage, HomeStore> {
                 Expanded(
                   flex: 1,
                   child: Observer(
-                    builder: (context) => const Center(
-                      child: Text('teste'),
+                    builder: (context) => Center(
+                      child: ListView.builder(
+                        itemCount: store.files.length,
+                        itemBuilder: (_, i) => Text(store.files.elementAt(i)),
+                      ),
                     ),
                   ),
                 ),

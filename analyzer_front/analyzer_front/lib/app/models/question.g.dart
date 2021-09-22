@@ -17,12 +17,10 @@ Question _$QuestionFromJson(Map<String, dynamic> json) => Question()
   ..variables = (json['Variables'] as List<dynamic>)
       .map((e) => Variable.fromJson(e as Map<String, dynamic>))
       .toList()
-  ..questionList = (json['QuestionList'] as List<dynamic>)
-      .map((e) => Question.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..sequenceList = (json['SequenceList'] as List<dynamic>)
-      .map((e) => Sequence.fromJson(e as Map<String, dynamic>))
-      .toList();
+  ..questionList =
+      (json['QuestionList'] as List<dynamic>).map((e) => e as String).toList()
+  ..sequenceList =
+      (json['SequenceList'] as List<dynamic>).map((e) => e as String).toList();
 
 Map<String, dynamic> _$QuestionToJson(Question instance) => <String, dynamic>{
       'Title': instance.title,

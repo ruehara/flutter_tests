@@ -9,6 +9,6 @@ class UserQuestionModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => UserQuestionPage()),
+    ChildRoute('/', child: (_, args) => const UserQuestionPage()),
   ];
 }

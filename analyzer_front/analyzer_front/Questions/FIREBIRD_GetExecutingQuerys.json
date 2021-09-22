@@ -1,0 +1,12 @@
+{
+	"Title"       : "GetExecutingQuerys",
+	"Description" : "Query for get executing querys",
+	"RunParser"   : "false",
+	"Dbms"        : ["firebird"],
+	"BeforeSql"   : "",
+	"Sql"         : [" SELECT ATT.MON$USER AS sid, ATT.MON$REMOTE_ADDRESS AS machine, STMT.MON$SQL_TEXT AS sql_text FROM MON$ATTACHMENTS ATT JOIN MON$STATEMENTS STMT ON ATT.MON$ATTACHMENT_ID = STMT.MON$ATTACHMENT_ID WHERE STMT.MON$STATE = 1;"],
+	"AfterSql"    : "",
+	"Variables"   : [],
+	"QuestionList": [],
+	"SequenceList": []
+}

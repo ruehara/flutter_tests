@@ -1,0 +1,17 @@
+{
+	"Title"       : "QueryCost",
+	"Description" : "Query to beeing analysed",
+	"RunParser"   : "false",
+	"Dbms"        : ["firebird"],
+	"BeforeSql"   : "",
+	"Sql"         : [" SELECT FIRST 1 MEM.MON$MEMORY_USED FROM MON$MEMORY_USAGE MEM NATURAL JOIN MON$STATEMENTS STMT WHERE  STMT.MON$SQL_TEXT LIKE '%{@sentence}%' ORDER BY  MEM.MON$MEMORY_USED DESC ;"],
+	"AfterSql"    : "",
+	"Variables"   : [
+		{
+			"Name": "sentence",
+			"Type": "query"
+		}
+	],
+	"QuestionList": [],
+	"SequenceList": []
+}

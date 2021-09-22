@@ -11,10 +11,13 @@ abstract class _UserQuestionStoreBase with Store {
   List<Question> questions = <Question>[];
 
   @observable
+  List<String> files = <String>[];
+
+  @observable
   Question newQuestion = Question();
 
   final String filePath =
-      '${Directory.current.path}/${settingsStore.settings.userQuestionDirectory}';
+      '${Directory.current.path}${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}';
 
   @action
   Future<bool> readJsonFile() async {
@@ -26,13 +29,20 @@ abstract class _UserQuestionStoreBase with Store {
         Map<String, dynamic> settingsMap = await jsonDecode(string.toString());
         questions.add(Question.fromJson(settingsMap));
       }
-      //if (await File(filePath).exists()) {
-      //  var string = await File(filePath).readAsString();
-      //  Map<String, dynamic> settingsMap = await jsonDecode(string.toString());
-      //  newQuestion = Question.fromJson(settingsMap);
-      //} else {
-      //  return await createJsonFile();
-      //}
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
+  @action
+  Future<bool> getFiles() async {
+    try {
+      final dir = Directory(filePath);
+      final List<FileSystemEntity> entities = await dir.list().toList();
+      for (var question in entities) {
+        files.add(question.path.split(Platform.pathSeparator).last);
+      }
       return true;
     } on Exception catch (_) {
       return false;

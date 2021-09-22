@@ -41,11 +41,11 @@ class Question {
 
   @JsonKey(name: 'QuestionList')
   @observable
-  List<Question> questionList = [];
+  List<String> questionList = [];
 
   @JsonKey(name: 'SequenceList')
   @observable
-  List<Sequence> sequenceList = [];
+  List<String> sequenceList = [];
 
   @action
   factory Question.fromJson(Map<String, dynamic> json) =>
