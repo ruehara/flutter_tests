@@ -10,5 +10,10 @@ class UserQuestionModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const UserQuestionPage()),
+    ChildRoute('/:name/:action',
+        child: (_, args) => UserQuestionDetail(
+              fileName: args.params['name'],
+              action: args.params['action'],
+            )),
   ];
 }

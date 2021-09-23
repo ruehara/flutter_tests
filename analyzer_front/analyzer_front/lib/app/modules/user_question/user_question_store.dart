@@ -16,6 +16,8 @@ abstract class _UserQuestionStoreBase with Store {
   @observable
   Question newQuestion = Question();
 
+  @observable
+  var edtFileName = TextEditingController();
   final String filePath =
       '${Directory.current.path}${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}';
 
@@ -53,6 +55,17 @@ abstract class _UserQuestionStoreBase with Store {
   }
 
   @action
+  Future<bool> deleteFile(String fileName, int index) async {
+    try {
+      questions.removeAt(index);
+      File('$filePath${Platform.pathSeparator}$fileName').delete();
+    } on Exception catch (_) {
+      return false;
+    }
+    return true;
+  }
+
+  @action
   Future<bool> createJsonFile() async {
     try {
       File(filePath).create(recursive: true).then((_) async {
@@ -86,5 +99,10 @@ abstract class _UserQuestionStoreBase with Store {
           return value.exitCode as int;
         });
     return result;
+  }
+
+  @action
+  Question getByIndex(int index) {
+    return questions.elementAt(index);
   }
 }

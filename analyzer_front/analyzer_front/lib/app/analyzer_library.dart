@@ -43,3 +43,4 @@ export 'package:analyzer_front/app/modules/logs/logs_module.dart';
 export 'package:analyzer_front/app/modules/user_question/user_question_module.dart';
 export 'package:path/path.dart';
 export 'package:analyzer_front/app/modules/question/question_module.dart';
+export 'package:analyzer_front/app/modules/user_question/use_question_detail.dart';

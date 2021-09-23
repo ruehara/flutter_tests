@@ -1,5 +1,4 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
-import 'package:analyzer_front/app/widgets/user_question_list.dart';
 
 class UserQuestionPage extends StatefulWidget {
   final String title;
@@ -48,17 +47,37 @@ class _UserQuestionState
                           child: Row(
                             children: [
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Modular.to.pushNamed(
+                                      '/userQuestions/${store.questions.elementAt(i).filename}/view');
+                                },
                                 icon: const Icon(Icons.remove_red_eye),
                                 color: Colors.grey,
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Modular.to.pushNamed(
+                                      '/userQuestions/${store.questions.elementAt(i).filename}/edit');
+                                },
                                 icon: const Icon(Icons.edit),
                                 color: Colors.orange,
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Dialogs dialog = Dialogs(
+                                      context: context, goToHome: false);
+                                  dialog.showAlertDialog().then(
+                                    (value) {
+                                      if (value) {
+                                        store.deleteFile(
+                                            store.questions
+                                                .elementAt(i)
+                                                .filename,
+                                            i);
+                                      }
+                                    },
+                                  );
+                                },
                                 icon: const Icon(Icons.delete),
                                 color: Colors.red,
                               )
@@ -74,7 +93,8 @@ class _UserQuestionState
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          store.callBackend('question', 'teste.json');
+          Modular.to.pushNamed('/userQuestions/add/create');
+          //store.callBackend('question', 'teste.json');
         },
         child: const Icon(Icons.add),
       ),
