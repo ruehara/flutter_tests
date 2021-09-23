@@ -1,0 +1,4 @@
+{
+  "ConnectionString": "Server=LAPTOP-UEHARA\\UEHARA;Database=FLUTTER;User Id=sa;Password=Masterkey1;",
+  "DataBaseType": "sqlserver"
+}

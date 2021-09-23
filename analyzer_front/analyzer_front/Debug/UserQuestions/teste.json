@@ -1,0 +1,12 @@
+{
+	"Title": "This is the Title",
+	"Description": "This is the Proposal",
+	"RunParser": "true",
+	"Dbms": [ "oracle", "sqlserver", "firebird", "sqlite", "postgresql" ],
+	"BeforeSql": "",
+	"Sql": [ "SELECT * FROM PERSONS" ],
+	"AfterSql": "",
+	"Variables": [],
+	"QuestionList": [ "SQLSERVER_CountRows.json" ],
+	"SequenceList": [ "SQLSERVER_SEQ_DataBaseInfo.json" ]
+}

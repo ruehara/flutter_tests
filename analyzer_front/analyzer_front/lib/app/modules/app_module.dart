@@ -37,5 +37,11 @@ class AppModule extends Module {
       transition: TransitionType.fadeIn,
       duration: const Duration(milliseconds: 1000),
     ),
+    ModuleRoute(
+      questionInitialRoute,
+      module: QuestionModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 1000),
+    ),
   ];
 }

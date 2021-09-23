@@ -50,7 +50,7 @@ class CreditsPageState extends State<CreditsPage>
                   child: Transform(
                     transform: Matrix4.identity()
                       ..setEntry(3, 2, 0.01)
-                      ..rotateX(-0.45),
+                      ..rotateX(-0.4),
                     alignment: FractionalOffset.center,
                     child: SingleChildScrollView(
                       controller: store.scrollController,

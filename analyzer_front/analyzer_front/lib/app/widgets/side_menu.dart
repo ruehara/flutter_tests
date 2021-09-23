@@ -44,7 +44,7 @@ class SideMenuState extends State<SideMenu> {
                 setState(() {
                   selectedIndex = 1;
                 });
-                //Modular.to.navigate(settingsInitialRoute);
+                Modular.to.navigate(questionInitialRoute);
               },
             ),
             ListTile(
@@ -69,7 +69,7 @@ class SideMenuState extends State<SideMenu> {
                   selectedIndex = 3;
                 });
 
-                //Modular.to.navigate('/settings');
+                Modular.to.navigate(sequenceInitialRoute);
               },
             ),
             ListTile(
@@ -81,7 +81,7 @@ class SideMenuState extends State<SideMenu> {
                 setState(() {
                   selectedIndex = 4;
                 });
-                //Modular.to.navigate('/todo');
+                Modular.to.navigate(dashboardInitialRoute);
               },
             ),
             ListTile(
@@ -105,7 +105,7 @@ class SideMenuState extends State<SideMenu> {
                 setState(() {
                   selectedIndex = 6;
                 });
-                Modular.to.navigate(settingsInitialRoute);
+                //Modular.to.navigate(conn);
               },
             ),
             ListTile(

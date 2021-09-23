@@ -26,10 +26,12 @@ class SettingsPageState extends State<SettingsPage> {
     required TextEditingController controller,
     required String labelText,
     required Function onchanged,
+    required bool enabled,
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: TextFormField(
+        enabled: enabled,
         controller: controller,
         onChanged: (value) => onchanged(value),
         maxLines: 1,
@@ -175,27 +177,33 @@ class SettingsPageState extends State<SettingsPage> {
         _textInput(
             controller: store.edtQuestionDirectory,
             onchanged: store.setQuestionDirectory,
-            labelText: 'Question Directory'),
+            labelText: 'Question Directory',
+            enabled: false),
         _textInput(
             controller: store.edtUserQuestionDirectory,
             onchanged: store.setUserQuestionDirectory,
-            labelText: 'UserQuestion Directory'),
+            labelText: 'UserQuestion Directory',
+            enabled: false),
         _textInput(
             controller: store.edtSequenceDirectory,
             onchanged: store.setSequenceDirectory,
-            labelText: 'Sequence Directory'),
+            labelText: 'Sequence Directory',
+            enabled: false),
         _textInput(
             controller: store.edtReportDirectory,
             onchanged: store.setReportDirectory,
-            labelText: 'Report Directory'),
+            labelText: 'Report Directory',
+            enabled: false),
         _textInput(
             controller: store.edtLogDirectory,
             onchanged: store.setLogDirectory,
-            labelText: 'Log Directory'),
+            labelText: 'Log Directory',
+            enabled: false),
         _textInput(
           controller: store.edtLogFileName,
           onchanged: store.setLogFileName,
           labelText: 'Log FileName',
+          enabled: true,
         ),
       ]),
     );
@@ -217,21 +225,29 @@ class SettingsPageState extends State<SettingsPage> {
               onchanged: store.setUserProfile,
               list: ['', 'admin', 'user']),
           _textInput(
-              controller: store.edtFirebirdPrefix,
-              onchanged: store.setFirebirdPrefix,
-              labelText: 'Firebird Prefix'),
+            controller: store.edtFirebirdPrefix,
+            onchanged: store.setFirebirdPrefix,
+            labelText: 'Firebird Prefix',
+            enabled: true,
+          ),
           _textInput(
-              controller: store.edtSqlServerPrefix,
-              onchanged: store.setSqlServerPrefix,
-              labelText: 'SqlServer Prefix'),
+            controller: store.edtSqlServerPrefix,
+            onchanged: store.setSqlServerPrefix,
+            labelText: 'SqlServer Prefix',
+            enabled: true,
+          ),
           _textInput(
-              controller: store.edtOraclePrefix,
-              onchanged: store.setOraclePrefix,
-              labelText: 'Oracle Prefix'),
+            controller: store.edtOraclePrefix,
+            onchanged: store.setOraclePrefix,
+            labelText: 'Oracle Prefix',
+            enabled: true,
+          ),
           _textInput(
-              controller: store.edtSqLitePrefix,
-              onchanged: store.setSqLitePrefix,
-              labelText: 'SQLite Prefix'),
+            controller: store.edtSqLitePrefix,
+            onchanged: store.setSqLitePrefix,
+            labelText: 'SQLite Prefix',
+            enabled: true,
+          ),
         ],
       ),
     );

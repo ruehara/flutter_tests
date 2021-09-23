@@ -27,7 +27,10 @@ abstract class _UserQuestionStoreBase with Store {
       for (var question in entities) {
         var string = await File(question.path).readAsString();
         Map<String, dynamic> settingsMap = await jsonDecode(string.toString());
-        questions.add(Question.fromJson(settingsMap));
+        var questionTemp = Question.fromJson(settingsMap);
+        questionTemp.filename =
+            question.path.split(Platform.pathSeparator).last;
+        questions.add(questionTemp);
       }
       return true;
     } on Exception catch (_) {
@@ -71,5 +74,17 @@ abstract class _UserQuestionStoreBase with Store {
     } on Exception catch (_) {
       return false;
     }
+  }
+
+  @action
+  Future<int> callBackend(String type, String filename) async {
+    int result = -1;
+    var process = Process.start(
+        '${Directory.current.path}${Platform.pathSeparator}Debug${Platform.pathSeparator}ldx_analyzer.exe',
+        ['--type', type, '--input', filename]);
+    await process.then((value) => () {
+          return value.exitCode as int;
+        });
+    return result;
   }
 }

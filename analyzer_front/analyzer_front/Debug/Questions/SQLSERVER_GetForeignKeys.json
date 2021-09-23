@@ -1,0 +1,21 @@
+{
+	"Title"       : "GetForeignKeys",
+	"Description" : "Get foreing keys.",
+	"RunParser"   : "false",
+	"Dbms"        : [ "sqlserver" ],
+	"BeforeSql"   : "",
+	"Sql"         : [ " select table_name, constraint_name, status from all_constraints where constraint_type = 'R' and r_constraint_name in ( select constraint_name from all_constraints where constraint_type in ('P', 'U') and table_name = @tableName and owner = @databaseOwner );" ],
+	"AfterSql"    : "",
+	"Variables"   : [
+		{
+			"Name": "tableName",
+			"Type": "table"
+		},
+		{
+			"Name": "databaseOwner",
+			"Type": "database"
+		}
+	],
+	"QuestionList": [],
+	"SequenceList": []
+}

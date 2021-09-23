@@ -1,0 +1,18 @@
+{
+	"Title"       : "Extract Index",
+	"Description" : "Extract Index",
+	"RunParser"   : "false",
+	"Dbms"        : [ "sqlserver" ],
+	"Dbms"   : "",
+	"BeforeSql"    : "",
+	"Sql"         : [ " SELECT a.name AS index_name, OBJECT_NAME(a.object_id) AS table_name, COL_NAME(b.object_id, b.column_id) AS column_Name FROM sys.indexes AS a INNER JOIN sys.index_columns AS b ON a.object_id = b.object_id AND a.index_id = b.index_id WHERE a.is_hypothetical = 0 AND a.object_id = OBJECT_ID(@tableName);" ],
+	"AfterSql"    : "",
+	"Variables"   : [
+		{
+			"Name": "tableName",
+			"Type": "table"
+		}
+	],
+	"QuestionList": [],
+	"SequenceList": []
+}

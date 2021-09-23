@@ -1,0 +1,12 @@
+{
+	"Title"       : "Database Version",
+	"Description" : "Select the Database Version",
+	"RunParser"   : "false",
+	"Dbms"        : ["firebird"],
+	"BeforeSql"   : "",
+	"Sql"         : [" select  RDB$GET_CONTEXT('SYSTEM', 'CLIENT_ADDRESS') AS address, rdb$get_context('SYSTEM','ENGINE_VERSION') as version  from  RDB$DATABASE;"],
+	"AfterSql"    : "",
+	"Variables"   : [],
+	"QuestionList": [],
+	"SequenceList": []
+}

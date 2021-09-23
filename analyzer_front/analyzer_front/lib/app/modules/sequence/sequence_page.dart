@@ -16,8 +16,8 @@ class SequencePageState extends State<SequencePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: const Center(
+        child: Text('Sequence page in construction'),
       ),
     );
   }

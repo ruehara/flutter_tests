@@ -1,0 +1,12 @@
+{
+	"Title"       : "DatabaseVersion",
+	"Description" : "Select database version",
+	"RunParser"   : "false",
+	"Dbms"        : ["oracle"],
+	"BeforeSql"   : "",
+	"Sql"         : [" SELECT product, version FROM product_component_version UNION SELECT DISTINCT 'Client oracle' product, s.client_version FROM v$session_connect_info s WHERE s.sid = SYS_CONTEXT('USERENV', 'SID'); "],
+	"AfterSql"    : "",
+	"Variables"   : [],
+	"QuestionList": [],
+	"SequenceList": []
+}

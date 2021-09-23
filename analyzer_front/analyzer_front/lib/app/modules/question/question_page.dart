@@ -9,6 +9,7 @@ class QuestionPage extends StatefulWidget {
 
 class QuestionPageState extends State<QuestionPage> {
   final QuestionStore store = Modular.get();
+  final SideMenu sideMenu = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +17,18 @@ class QuestionPageState extends State<QuestionPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: Row(
+        children: [
+          sideMenu,
+          Expanded(
+            flex: 1,
+            child: Observer(
+              builder: (context) => const Center(
+                child: Text('Question page in construction...'),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
