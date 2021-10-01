@@ -1,0 +1,81 @@
+{
+  "Name": "teste.json",
+  "TimeStamp": "2021-09-23 11:06:26.5420",
+  "Results": [
+    {
+      "Title": "This is the Title",
+      "Description": "This is the Proposal",
+      "Elapsed_time": 31,
+      "Datatable": [
+        [
+          {
+            "PersonID": "1",
+            "LastName": "Uehara",
+            "FirstName": "Rodrigo",
+            "Address": "Rua Teste 123",
+            "City": "Udia"
+          }
+        ]
+      ]
+    },
+    {
+      "Title": "Row Count",
+      "Description": "Count the rows from the query",
+      "Elapsed_time": 50,
+      "Datatable": [
+        [
+          {
+            "COUNT": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "Title": "Database Version",
+      "Description": "Select the Database Version",
+      "Elapsed_time": 0,
+      "Datatable": [
+        [
+          {
+            "Column1": "Developer Edition (64-bit)",
+            "Column2": "Microsoft SQL Server 2019 (RTM) - 15.0.2000.5 (X64) \n\tSep 24 2019 13:48:23 \n\tCopyright (C) 2019 Microsoft Corporation\n\tDeveloper Edition (64-bit) on Windows 10 Home Single Language 10.0 <X64> (Build 19043: )\n"
+          }
+        ]
+      ]
+    },
+    {
+      "Title": "Get Executing Querys",
+      "Description": "Get Executing Querys",
+      "Elapsed_time": 24,
+      "Datatable": [
+        [
+          {
+            "sid": "55",
+            "machine": "LAPTOP-UEHARA",
+            "sql_text": "SELECT S.SESSION_ID AS sid, S.HOST_NAME as machine, SUBSTRING(ST.TEXT,(R.STATEMENT_START_OFFSET / 2) + 1,((CASE R.STATEMENT_END_OFFSET WHEN -1 THEN DATALENGTH(ST.TEXT) ELSE R.STATEMENT_END_OFFSET END - R.STATEMENT_START_OFFSET) / 2) + 1) AS sql_text FROM SYS.DM_EXEC_SESSIONS AS S JOIN SYS.DM_EXEC_REQUESTS AS R ON R.SESSION_ID = S.SESSION_ID CROSS APPLY SYS.DM_EXEC_SQL_TEXT(R.SQL_HANDLE) AS ST ORDER BY R.CPU_TIME DESC, R.STATUS, R.BLOCKING_SESSION_ID, S.SESSION_ID"
+          }
+        ]
+      ]
+    },
+    {
+      "Title": "Operational System",
+      "Description": "Select the distribuition of the system",
+      "Elapsed_time": 5,
+      "Datatable": [
+        [
+          {
+            "host_distribution": "Windows 10 Home Single Language"
+          }
+        ]
+      ]
+    },
+    {
+      "Title": "Extract Index",
+      "Description": "Extract Index",
+      "Elapsed_time": 37,
+      "Datatable": [
+        []
+      ]
+    }
+  ]
+}

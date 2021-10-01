@@ -3,16 +3,15 @@ import 'package:analyzer_front/app/analyzer_library.dart';
 class UserQuestionModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.factory((i) => UserQuestionStore()),
-    Bind.lazySingleton((i) => SettingsStore()),
+    Bind.instance((i) => UserQuestionStore()),
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const UserQuestionPage()),
-    ChildRoute('/:name/:action',
+    ChildRoute('/:index/:action',
         child: (_, args) => UserQuestionDetail(
-              fileName: args.params['name'],
+              index: args.params['index'],
               action: args.params['action'],
             )),
   ];

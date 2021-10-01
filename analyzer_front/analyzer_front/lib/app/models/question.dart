@@ -7,9 +7,6 @@ part 'question.g.dart';
 class Question {
   Question();
 
-  @observable
-  String filename = "";
-
   @JsonKey(name: 'Title')
   @observable
   String title = "";

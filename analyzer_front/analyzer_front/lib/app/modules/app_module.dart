@@ -5,6 +5,7 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind.singleton((i) => const SideMenu(), export: true),
     Bind.singleton((i) => SettingsStore(), export: true),
+    Bind.singleton((i) => UserQuestionStore(), export: true),
   ];
 
   @override

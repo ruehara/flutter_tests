@@ -8,31 +8,74 @@ final SettingsStore settingsStore = Modular.get();
 
 abstract class _UserQuestionStoreBase with Store {
   @observable
-  List<Question> questions = <Question>[];
+  ObservableList<Question> questions = ObservableList<Question>();
 
   @observable
-  List<String> files = <String>[];
+  ObservableList<String> files = ObservableList<String>();
 
   @observable
   Question newQuestion = Question();
 
   @observable
+  bool isEditing = false;
+
+  @observable
   var edtFileName = TextEditingController();
-  final String filePath =
+  String teste = settingsStore.settings.userQuestionDirectory;
+  String filePath =
       '${Directory.current.path}${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}';
+
+  @observable
+  var edtTitle = TextEditingController();
+  @observable
+  var edtDescription = TextEditingController();
+  @observable
+  var edtRunParser = TextEditingController();
+  @observable
+  var edtDbms = TextEditingController();
+  @observable
+  var edtBeforeSql = TextEditingController();
+  @observable
+  var edtSql = TextEditingController();
+  @observable
+  var edtAfterSql = TextEditingController();
+  @observable
+  var edtVariables = TextEditingController();
+  @observable
+  var edtQuestionList = TextEditingController();
+  @observable
+  var edtSequenceList = TextEditingController();
+
+  @action
+  void setTitle(String value) {
+    newQuestion.title = value;
+  }
+
+  @action
+  void setDescription(String value) {
+    newQuestion.description = value;
+  }
+
+  @action
+  void setRunParser(bool value) {
+    newQuestion.runParser = value;
+  }
+
+  @action
+  void editing(bool value) {
+    isEditing = value;
+  }
 
   @action
   Future<bool> readJsonFile() async {
     try {
-      final dir = Directory(filePath);
+      final dir =
+          Directory('$filePath${settingsStore.settings.userQuestionDirectory}');
       final List<FileSystemEntity> entities = await dir.list().toList();
       for (var question in entities) {
         var string = await File(question.path).readAsString();
         Map<String, dynamic> settingsMap = await jsonDecode(string.toString());
-        var questionTemp = Question.fromJson(settingsMap);
-        questionTemp.filename =
-            question.path.split(Platform.pathSeparator).last;
-        questions.add(questionTemp);
+        questions.add(Question.fromJson(settingsMap));
       }
       return true;
     } on Exception catch (_) {
@@ -43,7 +86,9 @@ abstract class _UserQuestionStoreBase with Store {
   @action
   Future<bool> getFiles() async {
     try {
-      final dir = Directory(filePath);
+      files.clear();
+      final dir =
+          Directory('$filePath${settingsStore.settings.userQuestionDirectory}');
       final List<FileSystemEntity> entities = await dir.list().toList();
       for (var question in entities) {
         files.add(question.path.split(Platform.pathSeparator).last);
@@ -58,7 +103,9 @@ abstract class _UserQuestionStoreBase with Store {
   Future<bool> deleteFile(String fileName, int index) async {
     try {
       questions.removeAt(index);
-      File('$filePath${Platform.pathSeparator}$fileName').delete();
+      files.removeAt(index);
+      File('$filePath${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}${Platform.pathSeparator}$fileName')
+          .delete();
     } on Exception catch (_) {
       return false;
     }
@@ -102,7 +149,13 @@ abstract class _UserQuestionStoreBase with Store {
   }
 
   @action
-  Question getByIndex(int index) {
-    return questions.elementAt(index);
+  void getByIndex(int index) {
+    newQuestion = questions.elementAt(index);
+  }
+
+  @action
+  void initialization() {
+    edtTitle.text = newQuestion.title;
+    edtDescription.text = newQuestion.description;
   }
 }

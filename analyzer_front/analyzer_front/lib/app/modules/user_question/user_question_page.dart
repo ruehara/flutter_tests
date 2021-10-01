@@ -9,17 +9,18 @@ class UserQuestionPage extends StatefulWidget {
   _UserQuestionState createState() => _UserQuestionState();
 }
 
-class _UserQuestionState
-    extends ModularState<UserQuestionPage, UserQuestionStore> {
+class _UserQuestionState extends State<UserQuestionPage> {
+  final UserQuestionStore store = Modular.get();
   final SideMenu sideMenu = Modular.get();
   CustomScrollBehavior scroll = CustomScrollBehavior();
   @override
   void initState() {
     super.initState();
     store.readJsonFile().then(
-          (_) => setState(() {}),
+          (_) => setState(() {
+            store.getFiles();
+          }),
         );
-    store.getFiles();
   }
 
   @override
@@ -37,32 +38,35 @@ class _UserQuestionState
                 builder: (context) => Center(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(20),
-                    itemCount: store.questions.length,
+                    itemCount: store.files.length,
                     itemBuilder: (_, i) => ListTile(
+                        hoverColor: Colors.black12,
                         tileColor: (i % 2 == 0 ? Colors.white : Colors.black12),
-                        title: Text(store.questions.elementAt(i).filename),
-                        subtitle: Text(store.questions.elementAt(i).title),
+                        title: Text(store.files.elementAt(i)),
                         trailing: SizedBox(
-                          width: 130,
+                          width: 150,
                           child: Row(
                             children: [
                               IconButton(
+                                tooltip: 'View',
                                 onPressed: () {
                                   Modular.to.pushNamed(
-                                      '/userQuestions/${store.questions.elementAt(i).filename}/view');
+                                      '/userQuestions/${i.toString()}/view');
                                 },
                                 icon: const Icon(Icons.remove_red_eye),
                                 color: Colors.grey,
                               ),
                               IconButton(
+                                tooltip: 'Edit',
                                 onPressed: () {
                                   Modular.to.pushNamed(
-                                      '/userQuestions/${store.questions.elementAt(i).filename}/edit');
+                                      '/userQuestions/${i.toString()}/edit');
                                 },
                                 icon: const Icon(Icons.edit),
                                 color: Colors.orange,
                               ),
                               IconButton(
+                                tooltip: 'Delete',
                                 onPressed: () {
                                   Dialogs dialog = Dialogs(
                                       context: context, goToHome: false);
@@ -70,10 +74,7 @@ class _UserQuestionState
                                     (value) {
                                       if (value) {
                                         store.deleteFile(
-                                            store.questions
-                                                .elementAt(i)
-                                                .filename,
-                                            i);
+                                            store.files.elementAt(i), i);
                                       }
                                     },
                                   );
@@ -92,9 +93,10 @@ class _UserQuestionState
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Add new ',
         onPressed: () {
-          Modular.to.pushNamed('/userQuestions/add/create');
-          //store.callBackend('question', 'teste.json');
+          //Modular.to.pushNamed('/userQuestions/add/create');
+          store.callBackend('question', 'teste.json');
         },
         child: const Icon(Icons.add),
       ),
