@@ -1,6 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
 import 'package:analyzer_front/app/widgets/custom_selection.dart';
-import 'package:multiselect/multiselect.dart';
 
 class SequenceDetail extends StatefulWidget {
   final String? index;
@@ -49,55 +48,6 @@ class _SequenceDetailState extends State<SequenceDetail> {
     );
   }
 
-  _dropdown({
-    required String label,
-    required List<String> list,
-    required TextEditingController controller,
-    required Function onchanged,
-    required Key key,
-  }) {
-    return Container(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          label,
-          textAlign: TextAlign.left,
-          style: const TextStyle(fontSize: 11, color: Colors.black54),
-        ),
-        IgnorePointer(
-          ignoring: !store.isEditing,
-          child: DropdownButton<String>(
-            key: key,
-            value: controller.text,
-            icon: const Icon(Icons.arrow_drop_down_sharp),
-            isDense: true,
-            iconSize: 22,
-            elevation: 16,
-            isExpanded: true,
-            underline: Container(
-              height: 2,
-              color: Colors.black12,
-            ),
-            onChanged: (newValue) {
-              setState(() {
-                controller.text = newValue!;
-                onchanged(newValue);
-              });
-            },
-            items: list.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-        ),
-      ]),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,16 +88,16 @@ class _SequenceDetailState extends State<SequenceDetail> {
                                           labelText: 'Description',
                                           key: const Key('Description'),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 15,
                                         ),
-                                        const Text(
-                                          'Data Base Managment System',
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              color: Colors.black54),
-                                        ),
                                         DropDownMultiSelect(
+                                          label: const Text(
+                                            'Data Base Managment System',
+                                            style: TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.black54),
+                                          ),
                                           enabled: store.isEditing,
                                           onChanged: (List<String> value) {
                                             setState(() {
@@ -163,13 +113,13 @@ class _SequenceDetailState extends State<SequenceDetail> {
                                               store.newSequence.dataBase,
                                           whenEmpty: 'Select Something',
                                         ),
-                                        const Text(
-                                          'Questions',
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              color: Colors.black54),
-                                        ),
                                         DropDownMultiSelect(
+                                          label: const Text(
+                                            'Questions',
+                                            style: TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.black54),
+                                          ),
                                           enabled: store.isEditing,
                                           onChanged: (List<String> value) {
                                             setState(() {

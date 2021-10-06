@@ -140,7 +140,7 @@ abstract class _UserQuestionStoreBase with Store {
   Future<int> callBackend(String type, String filename) async {
     int result = -1;
     var process = Process.start(
-        '${Directory.current.path}${Platform.pathSeparator}Debug${Platform.pathSeparator}ldx_analyzer.exe',
+        '${Directory.current.path}${Platform.pathSeparator}ldx_analyzer.exe',
         ['--type', type, '--input', filename]);
     await process.then((value) => () {
           return value.exitCode as int;

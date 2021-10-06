@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/modules/connection/connection_module.dart';
 import 'package:analyzer_front/app/modules/sequence/sequence_module.dart';
 
 class AppModule extends Module {
@@ -49,6 +50,12 @@ class AppModule extends Module {
     ModuleRoute(
       sequenceInitialRoute,
       module: SequenceModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 1000),
+    ),
+    ModuleRoute(
+      connectionInitialRoute,
+      module: ConnectionModule(),
       transition: TransitionType.fadeIn,
       duration: const Duration(milliseconds: 1000),
     ),

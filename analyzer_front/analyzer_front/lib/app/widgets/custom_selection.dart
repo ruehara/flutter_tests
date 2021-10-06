@@ -1,64 +1,161 @@
+library multiselect;
+
 import 'package:flutter/material.dart';
+import 'package:states_rebuilder/states_rebuilder.dart';
 
-class MultiSelectDialog extends StatelessWidget {
-  final List<String> answers;
+class _TheState {}
 
-  final Widget question;
+var _theState = RM.inject(() => _TheState());
 
-  final List<String> selectedItems = [];
+class _SelectRow extends StatelessWidget {
+  final Function(bool) onChange;
+  final bool selected;
+  final String text;
 
-  static Map<String, bool> mappedItem = {};
-
-  MultiSelectDialog({Key? key, required this.answers, required this.question})
+  const _SelectRow(
+      {Key? key,
+      required this.onChange,
+      required this.selected,
+      required this.text})
       : super(key: key);
-
-  Map<String, bool> initMap() {
-    return mappedItem = Map.fromIterable(answers,
-        key: (k) => k.toString(),
-        value: (v) {
-          if (v != true && v != false) {
-            return false;
-          } else {
-            return v as bool;
-          }
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (mappedItem == null) {
-      initMap();
-    }
-    return SimpleDialog(
-      title: question,
+    return Row(
       children: [
-        ...mappedItem.keys.map((String key) {
-          return StatefulBuilder(
-            builder: (_, StateSetter setState) => CheckboxListTile(
-                title: Text(key),
-                value: mappedItem[key],
-                controlAffinity: ListTileControlAffinity.platform,
-                onChanged: (value) => setState(() => mappedItem[key] = value!)),
-          );
-        }).toList(),
-        Align(
-            alignment: Alignment.center,
-            child: ElevatedButton(
-                style:
-                    const ButtonStyle(visualDensity: VisualDensity.comfortable),
-                child: const Text('Submit'),
-                onPressed: () {
-                  selectedItems.clear();
-
-                  mappedItem.forEach((key, value) {
-                    if (value == true) {
-                      selectedItems.add(key);
-                    }
-                  });
-
-                  Navigator.pop(context, selectedItems);
-                }))
+        Checkbox(
+            value: selected,
+            onChanged: (x) {
+              onChange(x!);
+              _theState.notify();
+            }),
+        Text(text)
       ],
+    );
+  }
+}
+
+///
+/// A Dropdown multiselect menu
+///
+///
+class DropDownMultiSelect extends StatefulWidget {
+  /// The options form which a user can select
+  final List<String> options;
+
+  /// Selected Values
+  final List<String> selectedValues;
+
+  /// This function is called whenever a value changes
+  final Function(List<String>) onChanged;
+
+  /// defines whether the field is dense
+  final bool isDense;
+
+  /// defines whether the widget is enabled;
+  final bool enabled;
+
+  /// Input decoration
+  final InputDecoration? decoration;
+
+  /// this text is shown when there is no selection
+  final String? whenEmpty;
+
+  /// a function to build custom childern
+  final Widget Function(List<String> selectedValues)? childBuilder;
+
+  /// a function to build custom menu items
+  final Widget Function(String option)? menuItembuilder;
+
+  final Widget label;
+
+  const DropDownMultiSelect({
+    Key? key,
+    required this.options,
+    required this.selectedValues,
+    required this.onChanged,
+    required this.whenEmpty,
+    this.childBuilder,
+    this.menuItembuilder,
+    this.isDense = false,
+    this.enabled = true,
+    this.decoration,
+    required this.label,
+  }) : super(key: key);
+  @override
+  _DropDownMultiSelectState createState() => _DropDownMultiSelectState();
+}
+
+class _DropDownMultiSelectState extends State<DropDownMultiSelect> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 70,
+      child: Stack(
+        children: [
+          widget.label,
+          _theState.rebuild(() => widget.childBuilder != null
+              ? widget.childBuilder!(widget.selectedValues)
+              : Align(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 0),
+                      child: Text(widget.selectedValues.isNotEmpty
+                          ? widget.selectedValues
+                              .reduce((a, b) => a + ' , ' + b)
+                          : widget.whenEmpty ?? '')),
+                  alignment: Alignment.centerLeft)),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: DropdownButtonFormField<String>(
+              isDense: true,
+              onChanged: widget.enabled ? (x) {} : null,
+              value: null,
+              selectedItemBuilder: (context) {
+                return widget.options
+                    .map((e) => DropdownMenuItem(
+                          child: Container(),
+                        ))
+                    .toList();
+              },
+              items: widget.options
+                  .map((x) => DropdownMenuItem(
+                        child: _theState.rebuild(() {
+                          return widget.menuItembuilder != null
+                              ? widget.menuItembuilder!(x)
+                              : _SelectRow(
+                                  selected: widget.selectedValues.contains(x),
+                                  text: x,
+                                  onChange: (isSelected) {
+                                    if (isSelected) {
+                                      var ns = widget.selectedValues;
+                                      ns.add(x);
+                                      widget.onChanged(ns);
+                                    } else {
+                                      var ns = widget.selectedValues;
+                                      ns.remove(x);
+                                      widget.onChanged(ns);
+                                    }
+                                  },
+                                );
+                        }),
+                        value: x,
+                        onTap: () {
+                          if (widget.selectedValues.contains(x)) {
+                            var ns = widget.selectedValues;
+                            ns.remove(x);
+                            widget.onChanged(ns);
+                          } else {
+                            var ns = widget.selectedValues;
+                            ns.add(x);
+                            widget.onChanged(ns);
+                          }
+                        },
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

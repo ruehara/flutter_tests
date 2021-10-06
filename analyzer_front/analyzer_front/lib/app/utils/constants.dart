@@ -9,7 +9,7 @@ const String sequenceInitialRoute = "/sequences";
 const String reportsInitialRoute = "/reports";
 const String dashboardInitialRoute = "/dashboard";
 const String creditsInitialRoute = "/credits";
-
+const String connectionInitialRoute = "/connection";
 // files
 const String settingsFile = "appSettings.json";
 const String dataBaseFile = "databaseConfig.json";
