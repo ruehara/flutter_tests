@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/modules/sequence/sequence_module.dart';
 
 class AppModule extends Module {
   @override
@@ -6,6 +7,7 @@ class AppModule extends Module {
     Bind.singleton((i) => const SideMenu(), export: true),
     Bind.singleton((i) => SettingsStore(), export: true),
     Bind.singleton((i) => UserQuestionStore(), export: true),
+    Bind.singleton((i) => SequenceStore(), export: true),
   ];
 
   @override
@@ -41,6 +43,12 @@ class AppModule extends Module {
     ModuleRoute(
       questionInitialRoute,
       module: QuestionModule(),
+      transition: TransitionType.fadeIn,
+      duration: const Duration(milliseconds: 1000),
+    ),
+    ModuleRoute(
+      sequenceInitialRoute,
+      module: SequenceModule(),
       transition: TransitionType.fadeIn,
       duration: const Duration(milliseconds: 1000),
     ),

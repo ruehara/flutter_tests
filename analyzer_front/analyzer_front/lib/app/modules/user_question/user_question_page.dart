@@ -44,14 +44,17 @@ class _UserQuestionState extends State<UserQuestionPage> {
                         tileColor: (i % 2 == 0 ? Colors.white : Colors.black12),
                         title: Text(store.files.elementAt(i)),
                         trailing: SizedBox(
-                          width: 150,
+                          width: 170,
                           child: Row(
                             children: [
                               IconButton(
                                 tooltip: 'View',
                                 onPressed: () {
+                                  setState(() {
+                                    store.fileName = store.files.elementAt(i);
+                                  });
                                   Modular.to.pushNamed(
-                                      '/userQuestions/${i.toString()}/view');
+                                      '/userQuestions/view/${i.toString()}');
                                 },
                                 icon: const Icon(Icons.remove_red_eye),
                                 color: Colors.grey,
@@ -59,8 +62,11 @@ class _UserQuestionState extends State<UserQuestionPage> {
                               IconButton(
                                 tooltip: 'Edit',
                                 onPressed: () {
+                                  setState(() {
+                                    store.fileName = store.files.elementAt(i);
+                                  });
                                   Modular.to.pushNamed(
-                                      '/userQuestions/${i.toString()}/edit');
+                                      '/userQuestions/edit/${i.toString()}');
                                 },
                                 icon: const Icon(Icons.edit),
                                 color: Colors.orange,
@@ -81,6 +87,32 @@ class _UserQuestionState extends State<UserQuestionPage> {
                                 },
                                 icon: const Icon(Icons.delete),
                                 color: Colors.red,
+                              ),
+                              IconButton(
+                                tooltip: 'Run',
+                                onPressed: () {
+                                  Dialogs dialog = Dialogs(
+                                      context: context, goToHome: false);
+                                  dialog.showAlertDialog().then(
+                                    (value) {
+                                      if (value) {
+                                        store
+                                            .callBackend('question',
+                                                store.files.elementAt(i))
+                                            .then((value) => {
+                                                  if (value != 0)
+                                                    {
+                                                      const AlertDialog(
+                                                          title: Text(
+                                                              'Material Alert!')),
+                                                    }
+                                                });
+                                      }
+                                    },
+                                  );
+                                },
+                                icon: const Icon(Icons.play_arrow),
+                                color: Colors.red,
                               )
                             ],
                           ),
@@ -93,10 +125,13 @@ class _UserQuestionState extends State<UserQuestionPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Add new ',
+        tooltip: 'New User Question',
         onPressed: () {
-          //Modular.to.pushNamed('/userQuestions/add/create');
-          store.callBackend('question', 'teste.json');
+          setState(() {
+            store.newQuestion = Question();
+          });
+          Modular.to.pushNamed('/userQuestions/create');
+          //store.callBackend('question', 'teste.json');
         },
         child: const Icon(Icons.add),
       ),

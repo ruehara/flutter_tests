@@ -35,11 +35,20 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             bool condition,
           ) {
             return [
-              const SliverAppBar(
+              SliverAppBar(
+                centerTitle: true,
                 forceElevated: true,
                 pinned: true,
-                floating: true,
+                floating: false,
                 expandedHeight: 200,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(widget.title, textScaleFactor: 1.5),
+                  background: Image.network(
+                    "https://picsum.photos/1200/500",
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
               ),
             ];
           },

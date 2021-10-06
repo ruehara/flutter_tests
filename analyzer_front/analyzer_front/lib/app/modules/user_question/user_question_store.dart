@@ -21,9 +21,9 @@ abstract class _UserQuestionStoreBase with Store {
 
   @observable
   var edtFileName = TextEditingController();
-  String teste = settingsStore.settings.userQuestionDirectory;
-  String filePath =
-      '${Directory.current.path}${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}';
+  String filePath = '';
+
+  String fileName = '';
 
   @observable
   var edtTitle = TextEditingController();
@@ -57,8 +57,9 @@ abstract class _UserQuestionStoreBase with Store {
   }
 
   @action
-  void setRunParser(bool value) {
-    newQuestion.runParser = value;
+  void setRunParser(String value) {
+    newQuestion.runParser = value as bool;
+    edtRunParser.text = value;
   }
 
   @action
@@ -69,8 +70,9 @@ abstract class _UserQuestionStoreBase with Store {
   @action
   Future<bool> readJsonFile() async {
     try {
-      final dir =
-          Directory('$filePath${settingsStore.settings.userQuestionDirectory}');
+      filePath =
+          '${Directory.current.path}${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}';
+      final dir = Directory(filePath);
       final List<FileSystemEntity> entities = await dir.list().toList();
       for (var question in entities) {
         var string = await File(question.path).readAsString();
@@ -87,8 +89,7 @@ abstract class _UserQuestionStoreBase with Store {
   Future<bool> getFiles() async {
     try {
       files.clear();
-      final dir =
-          Directory('$filePath${settingsStore.settings.userQuestionDirectory}');
+      final dir = Directory(filePath);
       final List<FileSystemEntity> entities = await dir.list().toList();
       for (var question in entities) {
         files.add(question.path.split(Platform.pathSeparator).last);
@@ -104,8 +105,7 @@ abstract class _UserQuestionStoreBase with Store {
     try {
       questions.removeAt(index);
       files.removeAt(index);
-      File('$filePath${Platform.pathSeparator}${settingsStore.settings.userQuestionDirectory}${Platform.pathSeparator}$fileName')
-          .delete();
+      File('$filePath${Platform.pathSeparator}$fileName').delete();
     } on Exception catch (_) {
       return false;
     }
@@ -113,7 +113,7 @@ abstract class _UserQuestionStoreBase with Store {
   }
 
   @action
-  Future<bool> createJsonFile() async {
+  Future<bool> createJsonFile(String name) async {
     try {
       File(filePath).create(recursive: true).then((_) async {
         await saveJsonFile();
@@ -128,7 +128,7 @@ abstract class _UserQuestionStoreBase with Store {
   Future<bool> saveJsonFile() async {
     try {
       var data = newQuestion.toJson();
-      final File file = File(filePath);
+      final File file = File('$filePath${Platform.pathSeparator}$fileName');
       await file.writeAsString(jsonEncode(data));
       return true;
     } on Exception catch (_) {
@@ -157,5 +157,6 @@ abstract class _UserQuestionStoreBase with Store {
   void initialization() {
     edtTitle.text = newQuestion.title;
     edtDescription.text = newQuestion.description;
+    edtRunParser.text = newQuestion.runParser.toString();
   }
 }

@@ -1,10 +1,9 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
 
 class UserQuestionDetail extends StatefulWidget {
-  final String index;
+  final String? index;
   final String action;
-  const UserQuestionDetail(
-      {Key? key, required this.index, required this.action})
+  const UserQuestionDetail({Key? key, this.index, required this.action})
       : super(key: key);
 
   @override
@@ -18,7 +17,10 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
   @override
   void initState() {
     store.editing(widget.action.toLowerCase() != 'view');
-    store.getByIndex(int.parse(widget.index));
+    if (widget.index != null) {
+      store.getByIndex(int.parse(widget.index!));
+    }
+
     store.initialization();
     super.initState();
   }
@@ -64,30 +66,33 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
           textAlign: TextAlign.left,
           style: const TextStyle(fontSize: 11, color: Colors.black54),
         ),
-        DropdownButton<String>(
-          key: key,
-          value: controller.text,
-          icon: const Icon(Icons.arrow_drop_down_sharp),
-          isDense: true,
-          iconSize: 22,
-          elevation: 16,
-          isExpanded: true,
-          underline: Container(
-            height: 2,
-            color: Colors.black12,
+        IgnorePointer(
+          ignoring: !store.isEditing,
+          child: DropdownButton<String>(
+            key: key,
+            value: controller.text,
+            icon: const Icon(Icons.arrow_drop_down_sharp),
+            isDense: true,
+            iconSize: 22,
+            elevation: 16,
+            isExpanded: true,
+            underline: Container(
+              height: 2,
+              color: Colors.black12,
+            ),
+            onChanged: (newValue) {
+              setState(() {
+                controller.text = newValue!;
+                onchanged(newValue);
+              });
+            },
+            items: list.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
           ),
-          onChanged: (newValue) {
-            setState(() {
-              controller.text = newValue!;
-              onchanged(newValue);
-            });
-          },
-          items: list.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
         ),
       ]),
     );
@@ -131,9 +136,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
                               store.isEditing
                                   ? TextButton.icon(
                                       onPressed: () {
-                                        sideMenu.setSelected(0);
-                                        Modular.to
-                                            .navigate(Modular.initialRoute);
+                                        Modular.to.pop();
                                       },
                                       icon: const Icon(Icons.cancel),
                                       label: const Text("Cancel"),
@@ -146,11 +149,12 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
                                 onPressed: () {
                                   if (store.isEditing) {
                                     Dialogs dialog = Dialogs(
-                                        context: context, goToHome: true);
+                                        context: context, goToHome: false);
                                     dialog.showAlertDialog().then(
                                       (value) {
                                         if (value) {
                                           store.saveJsonFile();
+                                          Modular.to.pop();
                                         }
                                       },
                                     );
@@ -160,8 +164,8 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
                                 },
                                 icon: Icon((store.isEditing
                                     ? Icons.save
-                                    : Icons.check)),
-                                label: Text(store.isEditing ? "Save" : "Ok"),
+                                    : Icons.arrow_back)),
+                                label: Text(store.isEditing ? "Save" : "Back"),
                               ),
                             ],
                           )
@@ -181,21 +185,32 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
   Widget formFields() {
     return Observer(
       builder: (_) => Column(children: [
-        _textInput(
-          controller: store.edtTitle,
-          onchanged: store.setTitle,
-          labelText: 'Title',
-          key: const Key('Title'),
-        ),
-        _textInput(
-          controller: store.edtDescription,
-          onchanged: store.setDescription,
-          labelText: 'Description',
-          key: const Key('Description'),
+        Row(
+          children: [
+            Expanded(
+              child: _textInput(
+                controller: store.edtTitle,
+                onchanged: store.setTitle,
+                labelText: 'Title',
+                key: const Key('Title'),
+              ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: _textInput(
+                controller: store.edtDescription,
+                onchanged: store.setDescription,
+                labelText: 'Description',
+                key: const Key('Description'),
+              ),
+            ),
+          ],
         ),
         _dropdown(
           label: 'Run Parser',
-          list: ['true', 'false'],
+          list: ['false', 'true'],
           controller: store.edtRunParser,
           onchanged: store.setRunParser,
           key: const Key('Run_Parser'),
@@ -205,13 +220,6 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
           onchanged: store.setDescription,
           labelText: 'Before Sql',
           key: const Key('Before_Sql'),
-        ),
-        _dropdown(
-          label: 'Dbms',
-          list: ['oracle', 'sqlserver', 'firebird'],
-          controller: store.edtDbms,
-          onchanged: store.setRunParser,
-          key: const Key('Dbms'),
         ),
         _textInput(
           controller: store.edtDescription,

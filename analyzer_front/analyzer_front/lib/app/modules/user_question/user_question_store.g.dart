@@ -264,8 +264,8 @@ mixin _$UserQuestionStore on _UserQuestionStoreBase, Store {
       AsyncAction('_UserQuestionStoreBase.createJsonFile');
 
   @override
-  Future<bool> createJsonFile() {
-    return _$createJsonFileAsyncAction.run(() => super.createJsonFile());
+  Future<bool> createJsonFile(String name) {
+    return _$createJsonFileAsyncAction.run(() => super.createJsonFile(name));
   }
 
   final _$saveJsonFileAsyncAction =
@@ -305,6 +305,17 @@ mixin _$UserQuestionStore on _UserQuestionStoreBase, Store {
         name: '_UserQuestionStoreBase.setDescription');
     try {
       return super.setDescription(value);
+    } finally {
+      _$_UserQuestionStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setRunParser(String value) {
+    final _$actionInfo = _$_UserQuestionStoreBaseActionController.startAction(
+        name: '_UserQuestionStoreBase.setRunParser');
+    try {
+      return super.setRunParser(value);
     } finally {
       _$_UserQuestionStoreBaseActionController.endAction(_$actionInfo);
     }

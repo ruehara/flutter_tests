@@ -1,11 +1,1 @@
-{
-	"Title": "DataBase Informations",
-	"Description": "Extract all the dataBase Informations",
-	"DataBase": [ "sqlserver" ],
-	"Questions": [
-		"SQLSERVER_DatabaseVersion.json",
-		"SQLSERVER_GetExecutingQuerys.json",
-		"SQLSERVER_OperationalSystem.json",
-		"SQLSERVER_ExtractIndex.json"
-	]
-}
+{"Title":"DataBase Informations","Description":"Extract all the dataBase Informations","DataBase":["firebird","sqlserver"],"Questions":["SQLSERVER_DatabaseVersion.json","SQLSERVER_GetExecutingQuerys.json","SQLSERVER_ExtractIndex.json"]}

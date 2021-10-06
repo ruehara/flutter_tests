@@ -218,12 +218,12 @@ class SettingsPageState extends State<SettingsPage> {
               label: 'Log Detail Level',
               controller: store.edtLogDetail,
               onchanged: store.setLogDetailLevel,
-              list: ['', 'low', 'medium', 'high']),
+              list: ['low', 'medium', 'high']),
           _dropdown(
               label: 'User Profile',
               controller: store.edtUserProfile,
               onchanged: store.setUserProfile,
-              list: ['', 'admin', 'user']),
+              list: ['admin', 'user']),
           _textInput(
             controller: store.edtFirebirdPrefix,
             onchanged: store.setFirebirdPrefix,

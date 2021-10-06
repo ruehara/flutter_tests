@@ -1,7 +1,7 @@
 {
-	"Title": "Teste Run",
+	"Title": "This is the Title",
 	"Description": "This is the Proposal",
-	"RunParser": true,
+	"RunParser": "true",
 	"Dbms": [ "oracle", "sqlserver", "firebird", "sqlite", "postgresql" ],
 	"BeforeSql": "",
 	"Sql": [ "SELECT * FROM PERSONS" ],
