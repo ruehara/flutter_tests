@@ -26,47 +26,45 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ScrollConfiguration(
-        behavior: scroll,
-        child: NestedScrollView(
-          controller: ScrollController(initialScrollOffset: 200 - 56),
-          headerSliverBuilder: (
-            BuildContext context,
-            bool condition,
-          ) {
-            return [
-              SliverAppBar(
+      body: NestedScrollView(
+        scrollBehavior: scroll,
+        controller: ScrollController(initialScrollOffset: 200 - 56),
+        headerSliverBuilder: (
+          BuildContext context,
+          bool condition,
+        ) {
+          return [
+            SliverAppBar(
+              centerTitle: true,
+              forceElevated: true,
+              pinned: true,
+              floating: false,
+              expandedHeight: 200,
+              flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                forceElevated: true,
-                pinned: true,
-                floating: false,
-                expandedHeight: 200,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text(widget.title, textScaleFactor: 1.5),
-                  background: Image.network(
-                    "https://picsum.photos/1200/500",
-                    fit: BoxFit.fitWidth,
+                title: Text(widget.title, textScaleFactor: 1.5),
+                background: Image.network(
+                  "https://picsum.photos/1200/500",
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            ),
+          ];
+        },
+        body: ScrollConfiguration(
+          behavior: scroll,
+          child: Row(
+            children: [
+              sideMenu,
+              Expanded(
+                flex: 1,
+                child: Observer(
+                  builder: (context) => const Center(
+                    child: Text('teste'),
                   ),
                 ),
               ),
-            ];
-          },
-          body: ScrollConfiguration(
-            behavior: scroll,
-            child: Row(
-              children: [
-                sideMenu,
-                Expanded(
-                  flex: 1,
-                  child: Observer(
-                    builder: (context) => const Center(
-                      child: Text('teste'),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            ],
           ),
         ),
       ),
