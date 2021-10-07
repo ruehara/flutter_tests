@@ -12,7 +12,10 @@ abstract class _UserQuestionStoreBase with Store {
 
   @observable
   ObservableList<String> files = ObservableList<String>();
-
+  @observable
+  ObservableList<String> questionList = ObservableList<String>();
+  @observable
+  ObservableList<String> sequenceList = ObservableList<String>();
   @observable
   Question newQuestion = Question();
 
@@ -63,6 +66,21 @@ abstract class _UserQuestionStoreBase with Store {
   }
 
   @action
+  void setBeforeSql(String value) {
+    newQuestion.beforeSql = value;
+  }
+
+  @action
+  void setAfterSql(String value) {
+    newQuestion.afterSql = value;
+  }
+
+  @action
+  void setSql(List<String> value) {
+    newQuestion.sql = value;
+  }
+
+  @action
   void editing(bool value) {
     isEditing = value;
   }
@@ -93,6 +111,38 @@ abstract class _UserQuestionStoreBase with Store {
       final List<FileSystemEntity> entities = await dir.list().toList();
       for (var question in entities) {
         files.add(question.path.split(Platform.pathSeparator).last);
+      }
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
+  @action
+  Future<bool> getQuestionFiles() async {
+    try {
+      questionList.clear();
+      final dir = Directory(
+          '${Directory.current.path}${Platform.pathSeparator}Questions');
+      final List<FileSystemEntity> entities = await dir.list().toList();
+      for (var sequence in entities) {
+        questionList.add(sequence.path.split(Platform.pathSeparator).last);
+      }
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
+  @action
+  Future<bool> getSequenceFiles() async {
+    try {
+      sequenceList.clear();
+      final dir = Directory(
+          '${Directory.current.path}${Platform.pathSeparator}Sequences');
+      final List<FileSystemEntity> entities = await dir.list().toList();
+      for (var sequence in entities) {
+        sequenceList.add(sequence.path.split(Platform.pathSeparator).last);
       }
       return true;
     } on Exception catch (_) {
@@ -138,14 +188,10 @@ abstract class _UserQuestionStoreBase with Store {
 
   @action
   Future<int> callBackend(String type, String filename) async {
-    int result = -1;
-    var process = Process.start(
-        '${Directory.current.path}${Platform.pathSeparator}ldx_analyzer.exe',
+    var process = await Process.start(
+        '${Directory.current.path}${Platform.pathSeparator}Debug${Platform.pathSeparator}ldx_analyzer.exe',
         ['--type', type, '--input', filename]);
-    await process.then((value) => () {
-          return value.exitCode as int;
-        });
-    return result;
+    return process.exitCode;
   }
 
   @action

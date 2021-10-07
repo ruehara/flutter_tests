@@ -2,7 +2,7 @@
 	"Title": "Teste 2",
 	"Description": "This is the Proposal",
 	"RunParser": true,
-	"Dbms": [ "oracle", "sqlserver", "firebird", "sqlite", "postgresql" ],
+	"Dbms": [ "oracle", "sqlserver", "firebird" ],
 	"BeforeSql": "",
 	"Sql": [ "SELECT CLI.CDCL, CLI.DSRAZ FROM TAFCLI CLI INNER JOIN TAFCLIROTA ROTA ON ROTA.CDCL = CLI.CDCL WHERE ROTA.CDROTA = '12621';" ],
 	"AfterSql": "",

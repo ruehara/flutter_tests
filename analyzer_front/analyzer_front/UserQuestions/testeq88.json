@@ -1,1 +1,10 @@
-{"Title":"efgf eregergertet345345345345","Description":"This is the Proposal","RunParser":true,"Dbms":["oracle","sqlserver","firebird","sqlite","postgresql"],"BeforeSql":"","Sql":["SELECT CLI.CDCL, CLI.DSRAZ FROM TAFCLI CLI INNER JOIN TAFCLIROTA ROTA ON ROTA.CDCL = CLI.CDCL WHERE ROTA.CDROTA = '12621';"],"AfterSql":"","Variables":[],"QuestionList":["SQLSERVER_CountRows.json"],"SequenceList":["SQLSERVER_SEQ_DataBaseInfo.json"]}
+{"Title":"efgf eregergertet345345345345",
+"Description":"This is the Proposal",
+"RunParser":true,
+"Dbms":["oracle","sqlserver","firebird"],
+"BeforeSql":"",
+"Sql":["SELECT CLI.CDCL, CLI.DSRAZ FROM TAFCLI CLI INNER JOIN TAFCLIROTA ROTA ON ROTA.CDCL = CLI.CDCL WHERE ROTA.CDROTA = '12621';"],
+"AfterSql":"",
+"Variables":[],
+"QuestionList":["SQLSERVER_CountRows.json"],
+"SequenceList":["SQLSERVER_SEQ_DataBaseInfo.json"]}

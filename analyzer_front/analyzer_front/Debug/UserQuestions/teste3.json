@@ -2,7 +2,7 @@
 	"Title": "This is the Title",
 	"Description": "This is the Proposal",
 	"RunParser": "true",
-	"Dbms": [ "oracle", "sqlserver", "firebird", "sqlite", "postgresql" ],
+	"Dbms": [ "oracle", "sqlserver", "firebird" ],
 	"BeforeSql": "",
 	"Sql": [ "SELECT * FROM PERSONS" ],
 	"AfterSql": "",

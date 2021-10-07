@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/widgets/custom_selection.dart';
 
 class UserQuestionDetail extends StatefulWidget {
   final String? index;
@@ -22,6 +23,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
     }
 
     store.initialization();
+
     super.initState();
   }
 
@@ -31,20 +33,17 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
     required Function onchanged,
     required Key key,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: TextFormField(
-        key: key,
-        enabled: store.isEditing,
-        controller: controller,
-        onChanged: (value) => onchanged(value),
-        maxLines: 1,
-        decoration: InputDecoration(
-          labelText: labelText,
-        ),
-        validator: (value) =>
-            value!.isEmpty ? '$labelText can\'t be empty' : null,
+    return TextFormField(
+      key: key,
+      enabled: store.isEditing,
+      controller: controller,
+      onChanged: (value) => onchanged(value),
+      maxLines: 1,
+      decoration: InputDecoration(
+        labelText: labelText,
       ),
+      validator: (value) =>
+          value!.isEmpty ? '$labelText can\'t be empty' : null,
     );
   }
 
@@ -55,47 +54,44 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
     required Function onchanged,
     required Key key,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          label,
-          textAlign: TextAlign.left,
-          style: const TextStyle(fontSize: 11, color: Colors.black54),
-        ),
-        IgnorePointer(
-          ignoring: !store.isEditing,
-          child: DropdownButton<String>(
-            key: key,
-            value: controller.text,
-            icon: const Icon(Icons.arrow_drop_down_sharp),
-            isDense: true,
-            iconSize: 22,
-            elevation: 16,
-            isExpanded: true,
-            underline: Container(
-              height: 2,
-              color: Colors.black12,
-            ),
-            onChanged: (newValue) {
-              setState(() {
-                controller.text = newValue!;
-                onchanged(newValue);
-              });
-            },
-            items: list.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      const SizedBox(
+        height: 10,
+      ),
+      Text(
+        label,
+        textAlign: TextAlign.left,
+        style: const TextStyle(fontSize: 11, color: Colors.black54),
+      ),
+      IgnorePointer(
+        ignoring: !store.isEditing,
+        child: DropdownButton<String>(
+          key: key,
+          value: controller.text,
+          icon: const Icon(Icons.arrow_drop_down_sharp),
+          isDense: true,
+          iconSize: 22,
+          elevation: 16,
+          isExpanded: true,
+          underline: Container(
+            height: 2,
+            color: Colors.black12,
           ),
+          onChanged: (newValue) {
+            setState(() {
+              controller.text = newValue!;
+              onchanged(newValue);
+            });
+          },
+          items: list.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
         ),
-      ]),
-    );
+      ),
+    ]);
   }
 
   @override
@@ -111,19 +107,17 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
             sideMenu,
             Expanded(
               flex: 1,
-              child: Center(
-                child: Observer(
-                  builder: (context) => Form(
-                    child: SingleChildScrollView(
+              child: Observer(
+                builder: (context) => Form(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
                           Row(
                             children: [
                               Expanded(
                                 child: formFields(),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.all(20),
                               ),
                             ],
                           ),
@@ -208,24 +202,92 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
             ),
           ],
         ),
-        _dropdown(
-          label: 'Run Parser',
-          list: ['false', 'true'],
-          controller: store.edtRunParser,
-          onchanged: store.setRunParser,
-          key: const Key('Run_Parser'),
+        Row(
+          children: [
+            Expanded(
+              child: _dropdown(
+                label: 'Run Parser',
+                list: ['false', 'true'],
+                controller: store.edtRunParser,
+                onchanged: store.setRunParser,
+                key: const Key('Run_Parser'),
+              ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: DropDownMultiSelect(
+                label: const Text(
+                  'DataBase Managment System',
+                  style: TextStyle(fontSize: 11, color: Colors.black54),
+                ),
+                enabled: store.isEditing,
+                onChanged: (List<String> value) {
+                  setState(() {
+                    store.newQuestion.dbms = value;
+                  });
+                },
+                options: const ['firebird', 'oracle', 'sqlserver'],
+                selectedValues: store.newQuestion.dbms,
+                whenEmpty: 'Select Something',
+              ),
+            ),
+          ],
         ),
         _textInput(
-          controller: store.edtDescription,
-          onchanged: store.setDescription,
+          controller: store.edtBeforeSql,
+          onchanged: store.setBeforeSql,
           labelText: 'Before Sql',
           key: const Key('Before_Sql'),
         ),
         _textInput(
-          controller: store.edtDescription,
-          onchanged: store.setDescription,
+          controller: store.edtSql,
+          onchanged: store.setSql,
+          labelText: 'Sql',
+          key: const Key('Sql'),
+        ),
+        _textInput(
+          controller: store.edtAfterSql,
+          onchanged: store.setAfterSql,
           labelText: 'After Sql',
           key: const Key('After_Sql'),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: DropDownMultiSelect(
+                label: const Text(
+                  'Question List',
+                  style: TextStyle(fontSize: 11, color: Colors.black54),
+                ),
+                enabled: store.isEditing,
+                onChanged: (List<String> value) {
+                  setState(() {
+                    store.newQuestion.questionList = value;
+                  });
+                },
+                options: store.questionList,
+                selectedValues: store.newQuestion.questionList,
+                whenEmpty: 'Select Something',
+              ),
+            ),
+          ],
+        ),
+        DropDownMultiSelect(
+          label: const Text(
+            'Sequence List',
+            style: TextStyle(fontSize: 11, color: Colors.black54),
+          ),
+          enabled: store.isEditing,
+          onChanged: (List<String> value) {
+            setState(() {
+              store.newQuestion.sequenceList = value;
+            });
+          },
+          options: store.sequenceList,
+          selectedValues: store.newQuestion.sequenceList,
+          whenEmpty: 'Select Something',
         ),
       ]),
     );

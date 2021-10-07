@@ -1,4 +1,5 @@
 import 'package:analyzer_front/app/analyzer_library.dart';
+import 'package:analyzer_front/app/modules/user_question/user_question_sql.dart';
 
 class UserQuestionModule extends Module {
   @override
@@ -20,6 +21,13 @@ class UserQuestionModule extends Module {
       '/:action',
       child: (_, args) => UserQuestionDetail(
         action: args.params['action'],
+      ),
+    ),
+    ChildRoute(
+      '/:sql/:index',
+      child: (_, args) => UserQuestionSql(
+        action: args.params['sql'],
+        index: args.params['index'],
       ),
     ),
   ];

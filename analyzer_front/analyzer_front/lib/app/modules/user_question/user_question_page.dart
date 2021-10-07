@@ -18,6 +18,8 @@ class _UserQuestionState extends State<UserQuestionPage> {
     super.initState();
     store.readJsonFile().then(
           (_) => setState(() {
+            store.getSequenceFiles();
+            store.getQuestionFiles();
             store.getFiles();
           }),
         );
@@ -100,12 +102,27 @@ class _UserQuestionState extends State<UserQuestionPage> {
                                             .callBackend('question',
                                                 store.files.elementAt(i))
                                             .then((value) => {
-                                                  if (value != 0)
-                                                    {
-                                                      const AlertDialog(
-                                                          title: Text(
-                                                              'Material Alert!')),
-                                                    }
+                                                  showDialog<String>(
+                                                    context: context,
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        AlertDialog(
+                                                      title: const Text(
+                                                          'Return Code'),
+                                                      content: Text(
+                                                          'Finnished running ${store.files.elementAt(i)}\nReturned Code: $value'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  context,
+                                                                  'OK'),
+                                                          child:
+                                                              const Text('OK'),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                                 });
                                       }
                                     },
