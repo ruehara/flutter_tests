@@ -114,6 +114,18 @@ abstract class _SequenceStoreBase with Store {
   }
 
   @action
+  Future<bool> deleteFile(String fileName, int index) async {
+    try {
+      sequences.removeAt(index);
+      files.removeAt(index);
+      File('$filePath${Platform.pathSeparator}$fileName').delete();
+    } on Exception catch (_) {
+      return false;
+    }
+    return true;
+  }
+
+  @action
   void getByIndex(int index) {
     newSequence = sequences.elementAt(index);
   }

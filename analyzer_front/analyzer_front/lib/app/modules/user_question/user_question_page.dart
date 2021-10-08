@@ -50,6 +50,7 @@ class _UserQuestionState extends State<UserQuestionPage> {
                           child: Row(
                             children: [
                               IconButton(
+                                key: const Key('View'),
                                 tooltip: 'View',
                                 onPressed: () {
                                   setState(() {
@@ -62,6 +63,7 @@ class _UserQuestionState extends State<UserQuestionPage> {
                                 color: Colors.grey,
                               ),
                               IconButton(
+                                key: const Key('Edit'),
                                 tooltip: 'Edit',
                                 onPressed: () {
                                   setState(() {
@@ -74,6 +76,7 @@ class _UserQuestionState extends State<UserQuestionPage> {
                                 color: Colors.orange,
                               ),
                               IconButton(
+                                key: const Key('Delete'),
                                 tooltip: 'Delete',
                                 onPressed: () {
                                   Dialogs dialog = Dialogs(
@@ -91,6 +94,7 @@ class _UserQuestionState extends State<UserQuestionPage> {
                                 color: Colors.red,
                               ),
                               IconButton(
+                                key: const Key('Run'),
                                 tooltip: 'Run',
                                 onPressed: () {
                                   Dialogs dialog = Dialogs(
@@ -142,6 +146,7 @@ class _UserQuestionState extends State<UserQuestionPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('New'),
         tooltip: 'New User Question',
         onPressed: () {
           setState(() {

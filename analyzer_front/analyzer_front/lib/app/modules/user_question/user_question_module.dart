@@ -24,9 +24,8 @@ class UserQuestionModule extends Module {
       ),
     ),
     ChildRoute(
-      '/:sql/:index',
+      '/sql/:index',
       child: (_, args) => UserQuestionSql(
-        action: args.params['sql'],
         index: args.params['index'],
       ),
     ),

@@ -117,7 +117,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
                           Row(
                             children: [
                               Expanded(
-                                child: formFields(),
+                                child: formFields(context),
                               ),
                             ],
                           ),
@@ -129,6 +129,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
                             children: [
                               store.isEditing
                                   ? TextButton.icon(
+                                      key: const Key('Cancel'),
                                       onPressed: () {
                                         Modular.to.pop();
                                       },
@@ -140,6 +141,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
                                       width: 0,
                                     ),
                               TextButton.icon(
+                                key: const Key('Save'),
                                 onPressed: () {
                                   if (store.isEditing) {
                                     Dialogs dialog = Dialogs(
@@ -176,7 +178,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
     );
   }
 
-  Widget formFields() {
+  Widget formFields(BuildContext context) {
     return Observer(
       builder: (_) => Column(children: [
         Row(
@@ -241,11 +243,44 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
           labelText: 'Before Sql',
           key: const Key('Before_Sql'),
         ),
-        _textInput(
-          controller: store.edtSql,
-          onchanged: store.setSql,
-          labelText: 'Sql',
-          key: const Key('Sql'),
+        SizedBox(
+          height: 200,
+          child: ListView.builder(
+            padding: const EdgeInsets.all(20),
+            itemCount: store.newQuestion.sql.length,
+            itemBuilder: (_, i) => ListTile(
+                hoverColor: Colors.black12,
+                tileColor: (i % 2 == 0 ? Colors.white : Colors.black12),
+                title: Text(store.newQuestion.sql.elementAt(i)),
+                trailing: SizedBox(
+                  width: 100,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        key: const Key('View'),
+                        tooltip: 'View',
+                        onPressed: () {
+                          Modular.to
+                              .pushNamed('/userQuestions/sql/${i.toString()}');
+                        },
+                        icon: const Icon(Icons.remove_red_eye),
+                        color: Colors.grey,
+                      ),
+                      IconButton(
+                        key: const Key('Edit'),
+                        tooltip: 'Edit',
+                        onPressed: () {
+                          if (store.isEditing)
+                            Modular.to.pushNamed(
+                                '/userQuestions/sql/${i.toString()}');
+                        },
+                        icon: const Icon(Icons.edit),
+                        color: Colors.orange,
+                      ),
+                    ],
+                  ),
+                )),
+          ),
         ),
         _textInput(
           controller: store.edtAfterSql,
@@ -257,6 +292,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
           children: [
             Expanded(
               child: DropDownMultiSelect(
+                key: const Key('Question_List'),
                 label: const Text(
                   'Question List',
                   style: TextStyle(fontSize: 11, color: Colors.black54),
@@ -275,6 +311,7 @@ class _UserQuestionDetailState extends State<UserQuestionDetail> {
           ],
         ),
         DropDownMultiSelect(
+          key: const Key('Sequence_List'),
           label: const Text(
             'Sequence List',
             style: TextStyle(fontSize: 11, color: Colors.black54),

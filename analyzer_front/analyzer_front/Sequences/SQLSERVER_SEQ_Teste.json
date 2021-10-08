@@ -1,1 +1,0 @@
-{"Title":"Extract Informations","Description":"Extract all the dataBase Informations","DataBase":["firebird","sqlserver","oracle"],"Questions":["SQLSERVER_DatabaseVersion.json","SQLSERVER_GetExecutingQuerys.json","SQLSERVER_OperationalSystem.json","SQLSERVER_ExtractIndex.json","SQLSERVER_GetForeignKeys.json","SQLSERVER_CountRows.json","SQLSERVER_ActiveConnections.json"]}

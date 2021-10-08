@@ -1,12 +1,1 @@
-{
-	"Title": "Teste Run",
-	"Description": "This is the Proposal",
-	"RunParser": true,
-	"Dbms": [ "oracle", "sqlserver", "firebird" ],
-	"BeforeSql": "",
-	"Sql": [ "SELECT * FROM PERSONS" ],
-	"AfterSql": "",
-	"Variables": [],
-	"QuestionList": [ "SQLSERVER_CountRows.json", "SQLSERVER_DatabaseVersion.json" ],
-	"SequenceList": [ "SQLSERVER_SEQ_DataBaseInfo.json","SQLSERVER_SEQ_Teste.json" ]
-}
+{"Title":"Teste Run","Description":"This is the Proposal","RunParser":true,"Dbms":["oracle","sqlserver","firebird"],"BeforeSql":"","Sql":["SELECT * FROM PERSONS ;"],"AfterSql":"","Variables":[],"QuestionList":["SQLSERVER_CountRows.json","SQLSERVER_DatabaseVersion.json"],"SequenceList":["SQLSERVER_SEQ_DataBaseInfo.json","SQLSERVER_SEQ_Teste.json"]}

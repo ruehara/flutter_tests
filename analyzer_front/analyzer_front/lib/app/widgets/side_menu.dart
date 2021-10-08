@@ -24,6 +24,7 @@ class SideMenuState extends State<SideMenu> {
               height: 55,
             ),
             ListTile(
+              key: const Key('Home'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.home),
               title: const Text('Home'),
@@ -37,6 +38,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('Questions'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.list),
               title: const Text('Questions'),
@@ -49,6 +51,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('User_Questions'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.list),
               title: const Text('User Questions'),
@@ -61,6 +64,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('Sequences'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.schema),
               title: const Text('Sequences'),
@@ -74,6 +78,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('Settings'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
@@ -86,6 +91,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('Connection'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.storage),
               title: const Text('Connection'),
@@ -98,6 +104,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('Logs'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.note),
               title: const Text('Logs'),
@@ -110,6 +117,7 @@ class SideMenuState extends State<SideMenu> {
               },
             ),
             ListTile(
+              key: const Key('Credits'),
               hoverColor: Colors.blueGrey,
               leading: const Icon(Icons.credit_score),
               title: const Text('Credits'),

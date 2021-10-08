@@ -189,7 +189,7 @@ abstract class _UserQuestionStoreBase with Store {
   @action
   Future<int> callBackend(String type, String filename) async {
     var process = await Process.start(
-        '${Directory.current.path}${Platform.pathSeparator}Debug${Platform.pathSeparator}ldx_analyzer.exe',
+        '${Directory.current.path}${Platform.pathSeparator}ldx_analyzer.exe',
         ['--type', type, '--input', filename]);
     return process.exitCode;
   }

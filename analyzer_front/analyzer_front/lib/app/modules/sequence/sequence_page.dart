@@ -78,8 +78,13 @@ class SequencePageState extends State<SequencePage> {
                                   Dialogs dialog = Dialogs(
                                       context: context, goToHome: false);
                                   dialog.showAlertDialog().then(
-                                        (value) {},
-                                      );
+                                    (value) {
+                                      if (value) {
+                                        store.deleteFile(
+                                            store.files.elementAt(i), i);
+                                      }
+                                    },
+                                  );
                                 },
                                 icon: const Icon(Icons.delete),
                                 color: Colors.red,
